@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4 " style="background-color: ghostwhite;">
+      <div class="card-body">
+        <form [formGroup]="verifyTransaction" novalidate fxLayout="column wrap" fxLayoutAlign="center center"
+          fxLayoutGap="10px" (ngSubmit)="verifyVPA(verifyTransaction)">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-4 ">
+                <div class="card-body">
+                  <div class="row mt-4">
+                    <div class="col-md-1 currency">
+                      &#8377;
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Enter your Amount</mat-label>
+                        <input formControlName="amount" id="amount" autocomplete="off" type="number" matInput
+                         placeholder="Enter Amount">
+                        <mat-error *ngIf="myError('amount', 'required')">amount is required</mat-error>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="col-md-8"> </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col-md-1 ">
+                    </div>
+                    <div class="col-md-3">
+
+                      <mat-form-field class="example-full-width">
+                        <mat-label>UPI ID/Mobile Number</mat-label>
+                        <input formControlName="upiId" id="amount" autocomplete="off" 
+                          (keyup)="CheckUpiId(verifyTransaction)" (change)="CheckUpiId(verifyTransaction)" type="text"
+                          matInput placeholder="Enter UPI ID/Mobile number">
+                        <mat-error *ngIf="myError('upiId', 'required')">This is required</mat-error>
+                        <mat-error *ngIf="myError('upiId', 'pattern')">Invalid UPIID/Mobile Number</mat-error>
+                        <!-- <mat-error *ngIf="upiIdError">invalid UPI format.</mat-error> -->
+                        <mat-error *ngIf="myError('upiId', 'minlength')">Number must in 10 digit.</mat-error>
+                        <mat-error *ngIf="myError('upiId', 'maxlength')">Number must in 10 digit.</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-8"> </div>
+                  </div>
+                  <div style="margin-left: 95px;" >
+                    <!-- <button class="mt-4" type="submit" mat-raised-button color="primary">Verify</button> -->
+                    <button *ngIf="!verifyFlag" type="button" class="btn btn-sm btn-warning btn-rounded m-1"
+                    (click)="verifyVPA(verifyTransaction)">
+                    <i class="text-10 i-Checked-User"></i>
+                  </button>
+
+                  <button *ngIf="verifyFlag" type="button" class="btn btn-sm btn-success btn-rounded m-1">
+                    <i class="text-10 i-Checked-User"></i>
+                  </button>
+                  <button *ngIf="successFlag" style="margin-left: 20px;" class="mt-4" type="submit" (click)="proceed()"  mat-raised-button color="primary">Confirm Pay</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4" *ngIf="successFlag">
+            <div class="col-md-12">
+              <div class="card mb-4"  style="background-color: rgb(213, 231, 201);">
+                <div class="card-body">
+                  <P><strong> Name :</strong> XYZ</P>
+                  <P><strong>Account No :</strong> 878787878787</P>
+                  <P><strong>Bank :</strong> State Bank India</P>
+                  <P><strong>IFSC Code :</strong> IFSCCODE001</P>
+                  <div class="text-center">
+                    <button class="mt-4" type="submit" (click)="proceed()"  mat-raised-button color="primary">Proceed</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4" *ngIf="errorFlag">
+            <div class="col-md-12">
+              <div class="card mb-4" style="background-color: antiquewhite;">
+                <div class="card-body">
+                  <P><strong>No Data Found.!!!</strong></P>
+                  <div class="text-center">
+                    <button class="mt-4" (click)="retry()" mat-raised-button color="warn">Retry</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.timepicker-overlay {
+    z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+    z-index: 10000000 !important;
+}
+
+.btn-primary{
+    color: #fff  !important;
+    background-color: #1B3280 !important;
+    border-color: #1B3280 !important;
+    /* background:#1B3280; */
+}
+
+.btn-primary:hover {
+    color: #fff  !important;
+    background-color: #1B3280 !important;
+    border-color: #1B3280 !important;
+}
+.btn-info{
+    color: #fff  !important;
+    background-color: #1B3280 !important;
+    border-color: #1B3280 !important;
+    /* background:#1B3280; */
+}
+
+.btn-info:hover {
+    color: #fff  !important;
+    background-color: #1B3280 !important;
+    border-color: #1B3280 !important;
+}
+/* .text-primary {
+    color: #1B3280 !important;
+} */
+
+

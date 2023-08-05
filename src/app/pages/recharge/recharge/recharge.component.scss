@@ -1,0 +1,91 @@
+@import "/src/assets/styles/app/globals/mat-table-responsive";
+
+.export-button {
+  text-align: right;
+}
+
+.norec{
+  font-weight: bold;
+  padding: 15px 0 15px 35% !important;
+  color: red;
+}
+
+.mat-tooltip-trigger {
+  touch-action: auto !important;
+}
+
+[mat-list-item]{
+  touch-action: auto !important;
+}
+
+.scrollClass{
+  touch-action: auto !important;
+  // overflow-y: auto !important;
+}
+
+table{
+    width: 100%;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: blue;
+  font-weight: 700;
+}
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: black;
+  font-weight: 400;
+}
+.customTable {
+  overflow-x: scroll;
+  width: 100%;
+  overflow-y: scroll;
+  height: 380px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(29, 5, 247, 0.3); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.mat-column-username {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.example-container .mat-cell, .example-container .mat-header-cell{
+
+  word-wrap: initial !important;
+  display: table-cell !important;
+  padding: 12px 12px !important;
+  line-break: unset !important;
+  width: auto !important ;
+  white-space: inherit !important; 
+  overflow: hidden !important;
+  vertical-align: middle !important;
+}
+
+

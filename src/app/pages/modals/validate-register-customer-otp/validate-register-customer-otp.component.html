@@ -1,0 +1,64 @@
+<div class="modal-body">
+  <h5>
+    One Time Password (OTP) has been sent to
+    {{
+      agentName ? "Retailer mobile number" :
+      transactionType === "money-transfer"
+        ? "Customer mobile number"
+        : "Retailer mobile number"
+    }}
+    !
+    <span class="text-info">({{ customerOrRetailerMobileNo }})</span>
+  </h5>
+  <br />
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="col-md-12 mb-3">
+        <input
+          id="last_name"
+          class="form-control form-control-rounded"
+          type="text"
+          minlength="6"
+          [maxlength]="6"
+          [(ngModel)]="otpValue"
+          placeholder="Enter OTP"
+        />
+
+        <div class="invalid-feedback text-center" *ngIf="hideOtpErrorText">
+          Please enter valid OTP!
+        </div>
+
+        <div class="resent-otp text-right mt-3">
+          <a
+            (click)="resendOTP()"
+            [ngClass]="timeLeft != 0 ? 'in-active-link' : 'active-link'"
+          >
+            <span class="resend-text">RESEND OTP </span>
+          </a>
+          <span
+            *ngIf="timeLeft"
+            [ngClass]="timeLeft != 0 ? 'in-active-time' : 'active-time'"
+            >in {{ timeLeft }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-secondary btn-rounded"
+    (click)="close()"
+  >
+    Cancel
+  </button>
+  <btn-loading
+    btnClass="btn-primary btn-rounded"
+    [loadingText]="loadingText"
+    [loading]="loading"
+    (click)="confirm()"
+  >
+    {{ loadingText }}
+  </btn-loading>
+</div>

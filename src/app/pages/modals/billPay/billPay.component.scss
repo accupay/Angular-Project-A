@@ -1,0 +1,43 @@
+
+.bene-transaction-footer {
+  justify-content: center;
+}
+
+.dropdownClass{
+  width: 55%;
+  margin-left: 23%;
+}
+
+tr{
+  height: 45px !important;
+}
+
+@media (max-width: 766px) {
+
+.tdFont{
+  font-size: x-small;
+}
+tr{
+  height: 50px !important;
+}
+.marleft-7{
+  margin-left: -7px !important;
+}
+}
+
+
+.imagewid{
+  width: 90px;
+  height: 70px;
+}
+
+.h50 {
+  height: 50px;
+}
+
+.padd-33{
+  padding: 0 0 0 33% !important;
+}
+.nopad{
+  padding: 0;
+}

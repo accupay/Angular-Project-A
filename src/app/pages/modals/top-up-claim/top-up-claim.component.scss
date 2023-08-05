@@ -1,0 +1,76 @@
+.atp-topup {
+  width: 30rem !important;
+
+  .haha {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: left;
+  }
+}
+
+mat-form-field{
+  width: 100% !important;
+}
+
+.dateClass {
+  margin-left: 27% !important;
+  width: 44%;
+}
+#timeId{
+  margin-left: 0% !important;
+}
+textarea{
+  height: 80px;
+}
+
+input[type=file]::file-selector-button {
+  border: 2px solid #6c5ce7;
+  padding: .2em .4em;
+  border-radius: .2em;
+  background-color: blue;
+  transition: 1s;
+  color: #ddd;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: darkblue;
+  border: 2px solid white;
+}
+
+// .cdk-overlay-container{
+//   z-index: 2000;
+// }
+
+// .mat-datepicker-content{ z-index: 2500 !important;}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 2500 !important;
+}
+
+.cdk-overlay-container {
+  z-index: 2500 !important;
+}
+
+.timepicker-overlay {
+  z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+  z-index: 10000000 !important;
+}
+
+.modal-body{
+  z-index: 1000% !important;
+}
+
+@media (max-width: 768px) {
+
+  .modal-body {
+    width: 100% !important;
+  }
+
+  mat-form-field {
+    margin-left: 0% !important;
+  }
+}

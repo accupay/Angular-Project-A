@@ -1,0 +1,153 @@
+<div class="modal-body">
+  <h4 class="confirm-transaction text-center">Confirm Transaction!</h4>
+  <br />
+  <div class="col-md-12">
+    <div class="row">
+      <form [formGroup]="beneTransactionForm">
+        <div class="col-md-12 form-group mb-3 text-center">
+          <mat-form-field class="example-full-width">
+            <label><span style="font-size: 28px">&#8377;</span></label>
+            <input
+              matInput
+              placeholder=""
+              class="bene-transaction-amount-input"
+              formControlName="amount"
+              Decimalnumeric
+              numericType="number"
+              (keyup)="minAmountCheck($event.target.value)"
+              [class.is-invalid]="
+                amount.invalid && (amount.dirty || amount.touched)
+              "
+            />
+          </mat-form-field>
+          <div
+            *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+            class="invalid-feedback text-center"
+          >
+            <div *ngIf="amount.errors?.['required']">
+              Please enter the amount...
+            </div>
+          </div>
+          <div *ngIf="minAmount" class="invalid-feedback text-center">
+            Minimum amount is 100...
+          </div>
+        </div>
+
+        <div class="col-md-12 form-group mb-3">
+          <div class="radio-toolbar">
+            <input
+              type="radio"
+              id="radio1"
+              name="radios"
+              value="100"
+              (change)="getCustomAmount($event.target.value)"
+            />
+            <label for="radio1" class="mr-3"
+              ><span style="font-size: 15px">&#8377;</span>100</label
+            >
+
+            <input
+              type="radio"
+              id="radio2"
+              name="radios"
+              (change)="getCustomAmount($event.target.value)"
+              value="500"
+            />
+            <label for="radio2" class="mr-3"
+              ><span style="font-size: 15px">&#8377;</span>500</label
+            >
+
+            <input
+              type="radio"
+              id="radio3"
+              name="radios"
+              (change)="getCustomAmount($event.target.value)"
+              value="1000"
+            />
+            <label for="radio3" class="mr-3"
+              ><span style="font-size: 15px">&#8377;</span>1000</label
+            >
+
+            <input
+              type="radio"
+              id="radio4"
+              name="radios"
+              (change)="getCustomAmount($event.target.value)"
+              value="2000"
+            />
+            <label for="radio4" class="mr-3"
+              ><span style="font-size: 15px">&#8377;</span>2000</label
+            >
+          </div>
+        </div>
+        <br />
+        <br />
+
+        <div class="col-md-12 form-group mb-3">
+          <div class="card-body bene-transaction-pay-mode">
+            <div class="row">
+              <label
+                class="radio radio-success mr-2"
+                *ngIf="beneDetail?.imps_status_ref_id === '2'"
+              >
+                <input
+                  type="radio"
+                  value="1"
+                  formControlName="pay_mode_ref_id"
+                />
+                <span>IMPS</span>
+                <span class="checkmark"></span>
+              </label>
+              <label class="radio radio-info mr-2">
+                <input
+                  type="radio"
+                  value="2"
+                  formControlName="pay_mode_ref_id"
+                />
+                <span>NEFT</span>
+                <span class="checkmark"></span>
+              </label>
+              <label
+                class="radio radio-info mr-2"
+                *ngIf="transactionType === 'payout'"
+              >
+                <input
+                  type="radio"
+                  value="3"
+                  formControlName="pay_mode_ref_id"
+                />
+                <span>RTGS</span>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <p
+        *ngIf="checkValidIfscErrorText"
+        class="invalid-feedback text-12 text-center"
+      >
+        Please select above fields to fetch IFSC Code...
+      </p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer bene-transaction-footer">
+  <button ngbAutofocus class="bene-autofocus-hidden">View</button>
+  <button
+    type="button"
+    class="btn btn-outline-danger btn-rounded"
+    (click)="close()"
+  >
+    Cancel
+  </button>
+  <btn-loading
+    btnClass="btn-primary btn-rounded"
+    [loadingText]="loadingText"
+    [loading]="loading"
+    (click)="confirm()"
+  >
+    {{ loadingText }}
+  </btn-loading>
+</div>

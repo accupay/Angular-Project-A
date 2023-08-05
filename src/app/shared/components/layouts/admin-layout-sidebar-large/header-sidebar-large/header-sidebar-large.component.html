@@ -1,0 +1,277 @@
+<div class="main-header">
+  <div class="logo" style="cursor: pointer" (click)="returnHome()">
+    <img src="./assets/images/icon.png" alt="" />
+  </div>
+
+  <div class="menu-toggle" (click)="toggelSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div style="margin: auto" class="header-part-left-menu"></div>
+
+  <div class="header-part-right">
+    <div ngbDropdown [placement]="'bottom-right'">
+      <div class="badge-top-container mr-2">
+        <span ngbDropdownToggle>
+          <i class="i-File-Clipboard-Text--Image text-muted header-icon" style="font-size: 30px" role="button"></i>
+          <span class="report-text-hidden">Top Up</span>
+        </span>
+      </div>
+     
+      <div ngbDropdownMenu aria-labelledby="topUpDropDown" class="header-account-dropdown">
+        <button class="dropdown-item" (click)="topupInfo()">
+          <i class="i-Upward mr-1"></i>
+          Top Up Info
+        </button>
+        <button class="dropdown-item" (click)="topupClaimInfo()">
+          <i class="i-Wallet mr-1"></i>
+          Claim Top Up
+        </button>
+        <!-- <button class="dropdown-item"  [routerLink]="'/home/verifyVPA'">
+          <i class="i-Wallet mr-1"></i>
+          UPI Top Up
+        </button> -->
+      </div>
+    
+      <!-- <div
+        ngbDropdownMenu
+        aria-labelledby="reportDropDown"
+        class="header-account-dropdown atp-topup-dropdown"
+        *ngIf="topUpData.length"
+      >
+        <div class="col-md-12">
+          <div class="d-flex justify-content-between border-bottom p-2">
+            <div class="flex-grow-1 haha">
+              <p class="text-12 text-muted m-0"><strong>Bank Name</strong></p>
+            </div>
+            <div class="flex-grow-1 haha">
+              <p class="text-12 text-muted m-0"><strong>Account No</strong></p>
+            </div>
+            <div class="flex-grow-1 haha">
+              <p class="text-12 text-muted m-0"><strong>IFSC Code</strong></p>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-between border-bottom p-2"
+            *ngFor="let topUp of topUpData"
+          >
+            <div class="flex-grow-1 haha">
+              <p class="text-12 text-muted m-0">{{ topUp?.bank_name }}</p>
+            </div>
+            <div class="flex-grow-1 haha">
+              <p class="text-12 text-muted m-0">{{ topUp?.account_number }}</p>
+            </div>
+            <div class="flex-grow-1 haha">
+              <p class="text-12 text-muted m-0">{{ topUp?.ifsc_code }}</p>
+            </div>
+          </div>
+          <div class="card mb-4 o-hidden">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div ngbDropdown [placement]="'bottom-right'">
+      <div class="badge-top-container">
+        <span ngbDropdownToggle>
+          <i class="i-Bar-Chart text-muted header-icon" style="font-size: 30px" role="button"></i>
+          <span class="report-text-hidden">Reports</span>
+        </span>
+      </div>
+      <div ngbDropdownMenu aria-labelledby="reportDropDown" class="header-account-dropdown">
+        <button class="dropdown-item" [routerLink]="'/reports/transaction-report'">
+          <i class="i-Clock-3 mr-1"></i>
+          Account Statement
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/refund-payment-transaction-report'">
+          <i class="i-Over-Time mr-1"></i>
+          Refund Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/retailer-payment-transaction-report'">
+          <i class="i-Clock mr-1"></i>
+          DMT Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/payout-transaction-report'">
+          <i class="i-Clock mr-1"></i>
+          Payout Transaction Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/payout-refund-report'">
+          <i class="i-Clock mr-1"></i>
+          Payout Refund Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/retailer-PG-report'">
+          <i class="i-Clock mr-1"></i>
+          PG Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/retailer-topup-report'">
+          <i class="i-Clock mr-1"></i>
+          Top up Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/new-transaction-report'">
+          <i class="i-Clock mr-1"></i>
+          Transaction Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/statement-status-report'">
+          <i class="i-Clock mr-1"></i>
+          Settlement status Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/topup-claim-report'">
+          <i class="i-Clock mr-1"></i>
+          Topup Claim Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/status-recharge-report'">
+          <i class="i-Clock mr-1"></i>
+          Recharge Report
+        </button>
+        <button class="dropdown-item" [routerLink]="'/reports/bill-payment-report'">
+          <i class="i-Clock mr-1"></i>
+          Bill Payment Report
+        </button>
+      </div>
+    </div>
+
+    <div ngbDropdown [placement]="'bottom-right'" class="user col align-self-end">
+      <img src="./assets/images/faq_man.png" id="userDropdown" ngbDropdownToggle alt="" />
+
+      <div ngbDropdownMenu aria-labelledby="userDropdown" class="header-account-dropdown">
+        <div class="dropdown-header text-20">
+          <i class="i-Lock-User mr-1"></i> {{ retailerName }}
+        </div>
+        <button class="dropdown-item" (click)="profile('profile')">
+          Profile
+        </button>
+        <button class="dropdown-item" (click)="profile('support')">
+          Support Informations
+        </button>
+        <button class="dropdown-item" [routerLink]="'/home/change-password'">
+          Change Password
+        </button>
+        <button class="dropdown-item" [routerLink]="'/home/bank-info'">
+          Bank Details
+        </button>
+        <button class="dropdown-item" (click)="signout()">Sign out</button>
+      </div>
+    </div>
+
+    <!-- <i
+      class="i-Magnifi-Glass1 header-icon"
+      role="button"
+      (click)="searchService.searchOpen = true"
+    ></i>
+    <i
+      fullScreenWindow
+      class="i-Full-Screen header-icon d-none d-sm-inline-block"
+      role="button"
+    ></i>
+    <div
+      ngbDropdown
+      [placement]="'bottom-right'"
+      class="d-none d-sm-inline-block"
+    >
+      <i
+        ngbDropdownToggle
+        class="i-Gear text-muted header-icon"
+        role="button"
+      ></i>
+      <div ngbDropdownMenu class="menu-icon-grid-dropdown">
+        <div class="menu-icon-grid">
+          <a href="#"><i class="i-Shop-4"></i> Home</a>
+          <a href="#"><i class="i-Library"></i> UI Kits</a>
+          <a href="#"><i class="i-Drop"></i> Apps</a>
+          <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
+          <a href="#"><i class="i-Checked-User"></i> Sessions</a>
+          <a href="#"><i class="i-Ambulance"></i> Support</a>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div ngbDropdown [placement]="'bottom-right'">
+      <div class="badge-top-container">
+        <span class="badge badge-primary">{{ notifications.length }}</span>
+        <i
+          ngbDropdownToggle
+          class="i-Bell text-muted header-icon"
+          role="button"
+        ></i>
+      </div>
+      <div
+        ngbDropdownMenu
+        class="notification-dropdown rtl-ps-none"
+        perfectScrollbar
+      >
+        <div
+          class="dropdown-item d-flex"
+          *ngFor="let item of notifications"
+          [routerLink]="[item.link]"
+        >
+          <div class="notification-icon">
+            <i class="{{ item.icon }} text-{{ item.status }} mr-1"></i>
+          </div>
+          <div class="notification-details flex-grow-1">
+            <p class="m-0 d-flex align-items-center">
+              <span>{{ item.title }}</span>
+              <span
+                *ngIf="item.badge"
+                class="badge badge-pill badge-{{ item.status }} ml-1 mr-1"
+                >{{ item.badge }}</span
+              >
+              <span class="flex-grow-1"></span>
+              <span class="text-small text-muted ml-auto">{{
+                item.time | relativeTime
+              }}</span>
+            </p>
+            <p class="text-small text-muted m-0">
+              {{ item.text | excerpt : 30 }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Settings -->
+    <!-- <div class="header-part-right">
+    <i class="i-Magnifi-Glass1 header-icon" role="button"></i>
+    <i
+      class="i-Magnifi-Glass1 header-icon"
+      role="button"
+      (click)="searchService.searchOpen = true"
+    ></i>
+    <i
+      fullScreenWindow
+      class="i-Full-Screen header-icon d-none d-sm-inline-block"
+      role="button"
+    ></i>
+    <div
+      ngbDropdown
+      [placement]="'bottom-right'"
+      class="d-none d-sm-inline-block"
+    >
+      <i
+        ngbDropdownToggle
+        class="i-Gear text-muted header-icon"
+        role="button"
+      ></i>
+      <div ngbDropdownMenu class="menu-icon-grid-dropdown">
+        <div class="menu-icon-grid">
+          <a href="#"><i class="i-Shop-4"></i> Home</a>
+          <a href="#"><i class="i-Library"></i> UI Kits</a>
+          <a href="#"><i class="i-Drop"></i> Apps</a>
+          <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
+          <a href="#"><i class="i-Checked-User"></i> Sessions</a>
+          <a href="#"><i class="i-Ambulance"></i> Support</a>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

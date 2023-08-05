@@ -1,0 +1,42 @@
+<div class="modal-body">
+  <h5>Top up informations</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-12 atp-topup">
+      <div class="d-flex justify-content-between border-bottom p-2">
+        <div class="flex-grow-1 haha">
+          <p class="text-12 text-muted m-1"><strong>Bank Name</strong></p>
+        </div>
+        <div class="flex-grow-1 haha">
+          <p class="text-12 text-muted m-1"><strong>Account No</strong></p>
+        </div>
+        <div class="flex-grow-1 haha">
+          <p class="text-12 text-muted m-1"><strong>IFSC Code</strong></p>
+        </div>
+      </div>
+      <div
+        class="d-flex justify-content-between border-bottom p-2"
+        *ngFor="let topUp of topUpData"
+      >
+        <div class="flex-grow-1 haha">
+          <p class="text-12 text-muted m-1">{{ topUp?.bank_name }}</p>
+        </div>
+        <div class="flex-grow-1 haha">
+          <p class="text-12 text-muted m-1">{{ topUp?.account_number }}</p>
+        </div>
+        <div class="flex-grow-1 haha">
+          <p class="text-12 text-muted m-1">{{ topUp?.ifsc_code }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-secondary btn-rounded"
+    (click)="close()"
+  >
+    Close
+  </button>
+</div>

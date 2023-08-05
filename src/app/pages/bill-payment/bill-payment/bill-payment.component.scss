@@ -1,0 +1,192 @@
+@import "/src/assets/styles/app/globals/mat-table-responsive";
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+.scrollClass{
+  touch-action: auto !important;
+  overflow-y: scroll !important;
+}
+
+.touch-act{
+  touch-action: auto !important;
+}
+.export-button {
+    text-align: right;
+  }
+
+  .norec{
+    font-weight: bold;
+    padding: 15px 0 15px 35% !important;
+    color: red;
+  }
+  
+  .mat-tooltip-trigger {
+    touch-action: auto !important;
+  }
+
+  [mat-list-item]{
+    touch-action: auto !important;
+  }
+
+  // thead, th{
+  //   background-color: lavender !important;
+  // }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .bg-color{
+    // background-color: #2C5F9E;
+    background-color: #1B3280 !important;
+}
+.mobileshow{
+  display: none;
+}
+
+@media (max-width: 766px) {
+
+  .imagewid{
+    width: 40px;
+    height: 40px;
+  }
+
+  .barathimagewid{
+    width: 150px;
+    height: 50px;
+  }
+
+  .barathimagemobwid{
+    width: 100px;
+    height: 80px;
+  }
+
+  .p-mintext{
+    padding-left: 33px !important;
+  }
+  .pad-30{
+    padding-left: 30px !important;
+  }
+  .p-change{
+    width: min-content;
+    padding: 3px 0 0 22px;
+    // text-align: start;
+  }
+
+  .dis-grid{
+    display: none;
+  }
+  .mobileshow{
+    display: block;
+  }
+
+  .scrollClass{
+    touch-action: auto !important;
+    overflow-y: scroll !important;
+  }
+  
+  .imagewid{
+    width: 25px;
+    height: 25px;
+  }
+
+  .img-container{
+    text-align: center;
+    width: 85px;
+    height: 70px;
+    font-size: 8px;
+  }
+  
+  .container1{
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
+  .img-container:hover {
+    cursor: pointer;
+  
+    img{
+      height: 65px !important;
+      width: 65px !important;
+      
+    }
+    p {
+      color: blue;
+      font-weight: bold;
+    }
+    // color: blue;
+  }
+  
+  .maradj{
+    margin-bottom: 140px !important;
+  }
+
+}
+
+#content {
+  position: absolute;
+  overflow: auto;
+  width: 100vw;
+  top: var(--header-height);
+  left:0;
+  bottom: var(--footer-height);
+  display: flex;
+  flex-direction: row;
+  place-content: start;
+}
+
+
+@media (min-width: 766px) {
+
+  .imagewid{
+    width: 40px;
+    height: 40px;
+  }
+
+  .barathimagewid{
+    width: 100px;
+    height: 85px;
+  }
+
+  // .p-change{
+  //   width: min-content;
+  //   padding: 3px 0 0 20px;
+  // }
+
+  .img-container{
+    text-align: center;
+      width: 155px;
+      height: 130px;
+  }
+  
+  .container1{
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
+  .img-container:hover {
+    cursor: pointer;
+  
+    img{
+      height: 65px !important;
+      width: 65px !important;
+      
+    }
+    p {
+      color: blue;
+      font-weight: bold;
+    }
+    // color: blue;
+  }
+  
+  .maradj{
+    margin-bottom: 140px !important;
+  }
+
+}
+

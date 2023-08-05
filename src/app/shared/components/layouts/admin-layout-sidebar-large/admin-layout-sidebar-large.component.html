@@ -1,0 +1,110 @@
+<ngx-ui-loader [pbColor]="'#0b73bc'" [fgsColor]="'#d76826'"></ngx-ui-loader>
+<!-- 
+[logoUrl]="'../../../../../assets/images/icon.png'"
+[text]="'Please wait'"
+-->
+<div class="app-admin-wrap layout-sidebar-large">
+  <div>
+    <app-header-sidebar-large></app-header-sidebar-large>
+  </div>
+  <div class="side-content-wrap">
+    <app-sidebar-large></app-sidebar-large>
+  </div>
+  <div
+    class="main-content-wrap d-flex flex-column"
+    [ngClass]="{ 'sidenav-open': navService.sidebarState.sidenavOpen }"
+    [perfectScrollbar]="{ suppressScrollX: true }"
+  >
+  <div class="breadcrumb apt-breadcrump" *ngIf="headerTitle">
+    <p class="marquee "><span>{{scrollText}} </span></p>
+    <p class="marquee "><span>{{scrollText}} </span></p>
+    <!-- <p class="marquee "><span>asasa asdasdsad asdsadsad asdasdsad asdasdasd asdsadasdas asdasdasd
+      asdasdasd asdasd asdasd asdasdasdsa asdfasfsaf asfsafsadffasd safasfsaf safsafsaf safsafsaf asfsafsadffasdasf
+      asfasfsa asfsafsa asfasfaf adsfsafsaf asfsafsaf safsafsaf asfasfasf safsafsaf asfasfsaf safsafasf
+    </span></p>
+    <p class="marquee "><span>asasa asdasdsad asdsadsad asdasdsad asdasdasd asdsadasdas asdasdasd
+      asdasdasd asdasd asdasd asdasdasdsa asdfasfsaf asfsafsadffasd safasfsaf safsafsaf safsafsaf asfsafsadffasdasf
+      asfasfsa asfsafsa asfasfaf adsfsafsaf asfsafsaf safsafsaf asfasfasf safsafsaf asfasfsaf safsafasf
+    </span></p> -->
+    </div>
+    <div class="breadcrumb apt-breadcrump" *ngIf="headerTitle">
+
+
+      <!-- <div class="row"> -->
+        <div class="col-sm-5 title1">
+           <div class="dynamic-title">
+        <h3><i class="text-20"></i> {{ headerTitle }}</h3>
+      </div>
+        </div>
+
+        <div class="col-sm-5 title2  ">
+          <!-- <p class="marquee "><span>{{scrollText}} </span></p>
+          <p class="marquee "><span>{{scrollText}} </span></p> -->
+
+          <!-- <p class="marquee "><span>asasa asdasdsad asdsadsad asdasdsad asdasdasd asdsadasdas asdasdasd
+            asdasdasd asdasd asdasd asdasdasdsa asdfasfsaf asfsafsadffasd safasfsaf safsafsaf safsafsaf asfsafsadffasdasf
+            asfasfsa asfsafsa asfasfaf adsfsafsaf asfsafsaf safsafsaf asfasfasf safsafsaf asfasfsaf safsafasf
+          </span></p>
+          <p class="marquee "><span>asasa asdasdsad asdsadsad asdasdsad asdasdasd asdsadasdas asdasdasd
+            asdasdasd asdasd asdasd asdasdasdsa asdfasfsaf asfsafsadffasd safasfsaf safsafsaf safsafsaf asfsafsadffasdasf
+            asfasfsa asfsafsa asfasfaf adsfsafsaf asfsafsaf safsafsaf asfasfasf safsafsaf asfasfsaf safsafasf
+          </span></p> -->
+          
+        </div>
+        <div class="col-sm-2 text-right title1">
+         <div class="wallet-amount title1">
+         <div class="text-20">
+          <div
+            class="loader-bubble loader-bubble-info mr-3"
+            *ngIf="!walletBalance"
+          ></div>
+          <span class="amount mr-3" *ngIf="walletBalance">{{
+            walletBalance
+          }}</span>
+          <i
+            class="reload text-warning text-20 i-Reload"
+            (click)="checkWalletBalance()"
+          ></i>
+        </div>
+        </div>
+    
+      </div>
+      
+      <!-- <div class="dynamic-title">
+        <h3><i class="text-20"></i> {{ headerTitle }}</h3>
+      </div>
+      <div class="wallet-amount">
+        <div class="text-20">
+          <div
+            class="loader-bubble loader-bubble-info mr-3"
+            *ngIf="!walletBalance"
+          ></div>
+          <span class="amount mr-3" *ngIf="walletBalance">{{
+            walletBalance
+          }}</span>
+          <i
+            class="reload text-warning text-20 i-Reload"
+            (click)="checkWalletBalance()"
+          ></i>
+        </div>
+      </div> -->
+    <!-- </div> -->
+
+    <div
+      class="separator-breadcrumb border-top mt-3"
+      *ngIf="$menuTitle | async"
+    ></div>
+
+    <!-- Router Outlet -->
+    <div class="searchClasss">
+      <router-outlet></router-outlet>
+    </div>
+    
+    <div class="flex-grow-1"></div>
+    <!-- <app-footer></app-footer> -->
+    <div class="module-loader" *ngIf="moduleLoading">
+      <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+    </div>
+  </div>
+</div>
+<app-search *ngIf="searchService.searchOpen"></app-search>

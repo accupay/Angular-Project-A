@@ -1,0 +1,120 @@
+<div *ngIf="!kycFlag" class="modal-body">
+  <h2 class="confirm-transaction text-center">KYC</h2>
+  <br />
+  <h6 class="confirm-transaction text-center">Do you want KYC documents for this payment?</h6>
+  <div class="col-md-12">
+    <div class="row dropdownClass">
+      <div class="col-md-12 mb-3 text-center">
+        <ngx-select-dropdown [config]="kycTypeConfig" [options]="kycTypeList" [(ngModel)]="kycDefaultValue">
+        </ngx-select-dropdown>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="kycFlag" class="modal-body">
+  <h2 class="confirm-transaction text-center">KYC Document</h2>
+  <br />
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="card text-left">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Transaction ID</th>
+                  <th scope="col">
+                    {{
+                    transactionDetails.transaction_id
+                    ? transactionDetails?.transaction_id
+                    : "-"
+                    }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td>
+                    {{
+                    transactionDetails?.customer_name
+                    ? transactionDetails?.customer_name
+                    : "-"
+                    }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Payout Amount</th>
+                  <td>&#8377;
+                    {{
+                    transactionDetails?.amount
+                    ? transactionDetails?.amount
+                    : "0.00"
+                    }}
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <th scope="row">Aadhaar</th>
+                  <td>
+                    <p>Front Page <button class="btn btn-link"
+                        (click)="openLink(transactionDetails?.id_proof_front_file)">view?</button></p>
+                    <p>Back Page <button class="btn btn-link"
+                        (click)="openLink(transactionDetails?.id_proof_back_file)">view?</button></p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Credit card</th>
+                  <td>
+                    <p>Credit card Page <button class="btn btn-link"
+                        (click)="openLink(transactionDetails?.credit_card_image)">view?</button></p>
+
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Transaction Status</th>
+                  <td>
+                    {{
+                    transactionDetails?.transaction_status
+                    ? transactionDetails?.transaction_status
+                    : "-"
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!kycFlag" class="modal-footer bene-transaction-footer">
+  <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+    Cancel
+  </button>
+  <button type="button" class="btn btn-outline-primary btn-rounded" (click)="confirm('sub')">
+    Submit
+  </button>
+</div>
+
+<div *ngIf="kycFlag" class="modal-footer bene-transaction-footer">
+  <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+    Cancel
+  </button>
+
+  <button *ngIf="!readable" type="button" class="btn btn-outline-primary btn-rounded" (click)="confirm('Rej')">
+    Reject
+  </button>
+  <button *ngIf="!readable"  type="button" class="btn btn-outline-primary btn-rounded" (click)="confirm('App')">
+    Approve
+  </button>
+</div>

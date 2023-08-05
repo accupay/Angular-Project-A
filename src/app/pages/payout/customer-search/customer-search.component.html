@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-1 col-md-1"></div>
+  <div class="col-lg-10 col-md-10">
+    <div class="card mb-5 text-center">
+      <div class="card-body">
+        <form [formGroup]="customerSearchForm" (ngSubmit)="searchCustomer()">
+          <div class="row row-xs">
+            <div class="col-md-4">
+              <h5 class="mt-2">Enter Sender's Mobile Number</h5>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  id="mobile_no"
+                  class="form-control"
+                  formControlName="mobile_no"
+                  placeholder="Enter Mobile Number"
+                  type="text"
+                  minlength="10"
+                  [maxlength]="10"
+                  Decimalnumeric
+                  numericType="number"
+                  autocomplete="off"
+                  [class.is-invalid]="
+                    mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)
+                  "
+                />
+              </div>
+              <div
+                *ngIf="
+                  mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="mobile_no.errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="mobile_no.errors?.['maxlength']">
+                  This field must have at most 10 characters.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <btn-loading
+                  btnClass="btn-primary btn-rounded btn-block"
+                  [loadingText]="loadingText"
+                  [loading]="loading"
+                >
+                  {{ loadingText }}
+                </btn-loading>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-1 col-md-1"></div>
+</div>

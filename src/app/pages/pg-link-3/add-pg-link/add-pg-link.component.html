@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <form [formGroup]="pgLinkForm" (ngSubmit)="pgLinkRegistration()">
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="customer_phone">Mobile No</label>
+              <input
+                id="customer_phone"
+                class="form-control form-control-rounded"
+                formControlName="customer_phone"
+                minlength="10"
+                [maxlength]="10"
+                Decimalnumeric
+                numericType="number"
+                type="text"
+                autocomplete="off"
+                [class.is-invalid]="
+                  customer_phone.invalid &&
+                  (customer_phone.dirty || customer_phone.touched)
+                "
+                placeholder="Mobile Number"
+              />
+              <div
+                *ngIf="
+                  customer_phone.invalid &&
+                  (customer_phone.dirty || customer_phone.touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="customer_phone.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="transfer_amount" class="mr-3"
+                >Amount
+                <span class="ml-1" style="font-size: 15px">&#8377;</span></label
+              >
+              <input
+                class="form-control form-control-rounded"
+                placeholder="transfer_amount"
+                Decimalnumeric
+                numericType="number"
+                autocomplete="off"
+                formControlName="transfer_amount"
+                placeholder="Amount"
+              />
+              <div
+                *ngIf="
+                  transfer_amount.invalid &&
+                  (transfer_amount.dirty || transfer_amount.touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="transfer_amount.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="remarks">Remarks</label>
+              <textarea
+                class="form-control form-control-rounded"
+                placeholder="remarks"
+                autocomplete="off"
+                formControlName="remarks"
+                placeholder="Remarks"
+                name=""
+                id=""
+                cols="15"
+                rows="5"
+              ></textarea>
+              <div
+                *ngIf="remarks.invalid && (remarks.dirty || remarks.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="remarks.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <btn-loading
+                btnClass="btn-primary btn-rounded"
+                [loadingText]="loadingText"
+                [loading]="loading"
+              >
+                {{ loadingText }}
+              </btn-loading>
+
+              <button
+                type="button"
+                class="btn btn-warning btn-rounded m-1"
+                (click)="this.pgLinkForm.reset()"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body" style="text-align: center">
+        <h4>
+          <a href="{{ pgLinkUrl }}" target="_blank" style="color: #1172b3">{{
+            pgLinkUrl
+          }}</a>
+        </h4>
+        <h5>If you have any query, Please contact!</h5>
+
+        <div
+          class="text-15"
+          style="color: green"
+          (click)="whatsappRedirect('8447928988')"
+        >
+          Ping me on WhatsApp
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

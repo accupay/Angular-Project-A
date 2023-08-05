@@ -1,0 +1,169 @@
+<div class="modal-body">
+  <button
+    type="button"
+    class="close"
+    aria-label="Close button"
+    aria-describedby="modal-title"
+    (click)="close()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4>Transaction details</h4>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="card text-left">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Transaction ID</th>
+                  <th scope="col">
+                    {{
+                      beneTransactionDetails.transaction_id
+                        ? "#" + beneTransactionDetails?.transaction_id
+                        : "-"
+                    }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Sender Name</th>
+                  <td>
+                    {{
+                      beneTransactionDetails?.sender_name
+                        ? beneTransactionDetails?.sender_name
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Sender Mobile Number</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.sender_mobile_number
+                        ? beneTransactionDetails?.sender_mobile_number
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Beneficiary Name</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.beneficiary_name
+                        ? beneTransactionDetails?.beneficiary_name
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Amount</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.amount
+                        ? beneTransactionDetails?.amount
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <th scope="row">Total Amount</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.total_amount
+                        ? beneTransactionDetails?.total_amount
+                        : "-"
+                    }}
+                  </td>
+                </tr> -->
+                <!-- <tr>
+                  <th scope="row">Commission</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.commision
+                        ? beneTransactionDetails?.commision
+                        : "-"
+                    }}
+                  </td>
+                </tr> -->
+                <tr>
+                  <th scope="row">Account Number</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.account_number
+                        ? beneTransactionDetails?.account_number
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Bank Name</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.bank_name
+                        ? beneTransactionDetails?.bank_name
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">IFSC Code</th>
+                  <td>
+                    {{
+                      beneTransactionDetails.ifsc_code
+                        ? beneTransactionDetails?.ifsc_code
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">RRN</th>
+                  <td>
+                    {{
+                      beneTransactionDetails?.rrn
+                        ? beneTransactionDetails?.rrn
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Payment Mode</th>
+                  <td>
+                    {{
+                      beneTransactionDetails?.pay_mode_ref_id == 1
+                        ? "IMPS"
+                        : "NEFT"
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Agent Mobile No</th>
+                  <td>
+                    {{
+                      beneTransactionDetails?.agent_mobile
+                        ? beneTransactionDetails?.agent_mobile
+                        : "-"
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-info btn-rounded" (click)="print(1)">
+    Print
+  </button>
+  <button type="button" class="btn btn-info btn-rounded" (click)="print(2)">
+    Download
+  </button>
+  <button type="button" class="btn btn-info btn-rounded" (click)="close()">
+    Close
+  </button>
+</div>

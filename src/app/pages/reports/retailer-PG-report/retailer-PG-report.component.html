@@ -1,0 +1,307 @@
+<div class="retailerReport scrollClass">
+  <div class="row">
+    <div class="col-lg-1 col-md-1"></div>
+    <div class="col-lg-12 col-md-12">
+      <div class="card mb-5 text-center">
+        <div class="card-body">
+          <div class="row row-xs">
+            <div class="col-md-2 text-left">
+              <label for="fromDate" class="mb-0">From Date</label>
+              <mat-form-field class="atp-mat-date-picker">
+                <input
+                  matInput
+                  [matDatepicker]="dp1"
+                  [(ngModel)]="fromDate"
+                  [max]="maxDate"
+                  (click)="dp1.open()"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dp1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2 text-left">
+              <label for="toDate" class="mb-0">To Date</label>
+              <mat-form-field class="atp-mat-date-picker">
+                <input
+                  matInput
+                  [matDatepicker]="dp2"
+                  [(ngModel)]="toDate"
+                  [max]="maxDate"
+                  (click)="dp2.open()"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dp2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dp2></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-2 text-left">
+              <label for="searchBy">Search By</label>
+              <ngx-select-dropdown
+                [config]="searchByConfig"
+                [options]="searchByList"
+                [(ngModel)]="searchByDefaultValue"
+              >
+              </ngx-select-dropdown>
+            </div>
+
+            <div class="col-md-3 text-left">
+              <label for="searchBy">Value</label>
+              <input
+                id="last_name"
+                class="form-control icon"
+                type="search"
+                [(ngModel)]="searchValue"
+                placeholder="Enter to search from the datas"
+              />
+            </div>
+
+            <div class="col-md-2">
+              <label for="searchBy">&nbsp;</label>
+              <btn-loading
+                (click)="searchTransaction()"
+                btnClass="btn-primary btn-rounded btn-block"
+                [loadingText]="loadingText"
+                [loading]="loading"
+              >
+                {{ loadingText }}
+              </btn-loading>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1"></div>
+  </div>
+
+  <div class="export-button">
+    <div class="row">
+        <div class="col-md-4">
+          <input
+          id="last_name"
+          class="form-control icon"
+          type="search"
+          (keyup)="filterList()" (change)="filterList()"
+          [(ngModel)]="searchValues"
+          placeholder="Enter to search from the datas"
+        />
+        </div>
+        <div class="col-md-8">
+          <button type="button" class="btn btn-info m-1" (click)="exportToExcel()">
+            Export to Excel
+          </button>
+        </div>
+    </div>
+  </div>
+  <div *ngIf="!noRecordFlag && this.dataSource.data.length == 0" class="row norec"> No Record Found</div>
+  <div [ngClass]="changeClass()">
+    <table
+      mat-table
+      matSort
+      matTableResponsive
+      [dataSource]="dataSource"
+      class="reports-table"
+    >
+      <tr  class="mat-row" *matNoDataRow>
+        <td *ngIf="noRecordFlag" class="mat-cell text-center" [attr.colspan]="12">No Record Found</td>
+      </tr>
+      
+      <ng-container
+        matColumnDef="Transaction ID"
+        *ngIf="displayedColumns.includes('Transaction ID')"
+      >
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+          Transaction ID
+        </th>
+        <td mat-cell *matCellDef="let element" class="first-row">
+          {{ element.transaction_id ? element.transaction_id : "-"}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Link Created Date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Link Created Date
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.linkCreateddate ? element.linkCreateddate:"-" }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Link updated Date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Link updated Date
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.linkprocessedDate ? element.linkprocessedDate:"-" }}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="PG Receipt Link">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        PG Receipt Link
+        </th>
+        <td mat-cell *matCellDef="let element"  class="alink" (click)="openLink(element.pg_Receipt_link)">
+          <!-- {{element.pg_Receipt_link ? element.pg_Receipt_link :"-"}} -->
+          {{element.pg_Receipt_link ? "Recipient-Link" :"-"}}
+         </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PG Created Link">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        PG Created Link
+        </th>
+        <td mat-cell *matCellDef="let element"  class="alink" (click)="openLink(element.pg_link)">
+          <!-- {{element.pg_link ? element.pg_link :"-"}} -->
+          {{element.pg_Receipt_link ? "PG-created-Link" :"-"}}
+         </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PG Status">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        PG Status
+        </th>
+        <td mat-cell *matCellDef="let element"  >
+          <!-- {{element.pg_link ? element.pg_link :"-"}} -->
+          {{element.pg_status ? element.pg_status :"-"}}
+         </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Retailer Mobile Number">
+        <th
+          mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Retailer Mobile Number
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.mobile ? element.mobile :"-"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Retailer Name">
+        <th
+          mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+          Retailer Name
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.merchant_name ? element.merchant_name :"-"}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Amount">
+        <th
+          mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+          Amount
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.amount ? element.amount : "-" }}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="Created Date">
+        <th
+          mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Created Date
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.created_date ? element.created_date : "-" }}
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="Sevice Charge">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Sevice Charge
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.service_charge ? element.service_charge  : "-"}}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="Updated Date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Updated Date
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.updated_date ? element.updated_date:"-" }}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="Order Number">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Order Number
+        </th>
+        <td mat-cell *matCellDef="let element"> {{ element.utR_number ? element.utR_number :"-"}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Payment ID">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="headers atp-report-th-header"
+        >
+        Payment ID
+        </th>
+        <td mat-cell *matCellDef="let element"> {{ element.payment_id ? element.payment_id :"-"}}</td>
+      </ng-container>
+  
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 20, 30]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+</div>

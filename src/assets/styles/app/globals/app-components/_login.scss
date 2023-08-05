@@ -1,0 +1,193 @@
+.apt-session-page {
+  .invalid-feedback {
+    display: block !important;
+    color: red !important;
+  }
+  .top-nav-login {
+    min-height: 75px;
+    @media only screen and (max-width: 600px) {
+      min-height: 50px;
+    }
+    background-color: #0a73bb;
+    position: fixed;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+      rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    .logo1 {
+      float: left;
+      width: 100px;
+      .logo-1 {
+        width: 60px;
+        height: 60px;
+        margin: 5px 0px 5px 25px;
+      }
+    }
+    .logo2 {
+      float: left;
+      width: 150px;
+      .logo-2 {
+        margin: 16px 0px 5px 0px;
+        height: 48px;
+      }
+    }
+    .top-nav-right {
+      float: right;
+      color: white;
+      text-align: right;
+      margin: 14px;
+      .phone {
+        margin-right: -10px;
+      }
+    }
+    @media only screen and (max-width: 600px) {
+      .logo1 {
+        float: left;
+        width: 100px;
+        .logo-1 {
+          width: 40px;
+          height: 40px;
+          margin: 18px 0px 5px 13px;
+        }
+      }
+      .logo2 {
+        display: none;
+      }
+    }
+  }
+  .login-container {
+    main {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+    .form-login {
+      position: static;
+    }
+    .form-group {
+      position: unset !important;
+    }
+    .login {
+      display: flex;
+      flex-direction: unset;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 450px;
+      min-height: 100vh;
+      padding: clamp(35px, 8%, 50px);
+      @media only screen and (max-width: 600px) {
+        &.bgImg {
+          background-image: url("../../../../images/apt-Login-image.png");
+          //   background-image: url("../../../../assets/images/apt-Login-image.png");
+          object-fit: contain;
+        }
+      }
+      .auth-logo {
+        img {
+          width: 170px;
+        }
+      }
+    }
+    @media only screen and (max-width: 600px) {
+      .wallpaper {
+        display: none;
+      }
+    }
+    .wallpaper {
+      width: 100%;
+      background-image: url("../../../../images/apt-Login-image.png");
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+
+      .welcome-text {
+        font-size: 25px;
+      }
+      .business {
+        color: #0a73bb;
+        font-weight: bold;
+      }
+      #container {
+        margin-left: 3rem;
+        color: #999;
+        text-transform: uppercase;
+        font-size: 30px;
+        font-weight: bold;
+        padding-top: 150px;
+        // position: fixed;
+        width: 100%;
+        bottom: 60%;
+        display: block;
+      }
+
+      #flip {
+        height: 50px;
+        overflow: hidden;
+      }
+
+      #flip > div > div {
+        color: #fff;
+        // padding:4px 12px;
+        height: 40px;
+        margin-bottom: 45px;
+        display: inline-block;
+      }
+
+      #flip div:first-child {
+        animation: show 5s linear infinite;
+      }
+
+      #flip div div {
+        color: orange;
+        // background:#42c58a;
+      }
+      #flip div:first-child div {
+        color: orange;
+        // background:#4ec7f3;
+      }
+      #flip div:last-child div {
+        color: orange;
+        // background:#DC143C;
+      }
+
+      @keyframes show {
+        0% {
+          margin-top: -270px;
+        }
+        5% {
+          margin-top: -180px;
+        }
+        33% {
+          margin-top: -180px;
+        }
+        38% {
+          margin-top: -90px;
+        }
+        66% {
+          margin-top: -90px;
+        }
+        71% {
+          margin-top: 0px;
+        }
+        99.99% {
+          margin-top: 0px;
+        }
+        100% {
+          margin-top: -270px;
+        }
+      }
+    }
+  }
+  .login-footer {
+    position: fixed;
+    min-height: 50px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #0a73bb;
+    color: white;
+    text-align: center;
+    p {
+      margin-top: 14px !important;
+    }
+  }
+}

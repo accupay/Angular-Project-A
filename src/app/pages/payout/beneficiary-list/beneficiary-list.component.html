@@ -1,0 +1,592 @@
+<div class="card user-profile o-hidden mb-4">
+  <div class="user-info mt-2">
+    <img class="profile-picture avatar-lg mb-2" src="./assets/images/faq_man.png" alt="" />
+    <p class="m-0 text-24">
+      {{ customerDetails?.customer_name }} {{ customerDetails?.last_name }}
+    </p>
+    <p class="text-muted m-0 text-20 hidden">
+      Monthly Balance : {{ monthlyBalance }}
+    </p>
+    <a href="tel:+{{ customerDetails?.mobile_number }}" class="text-muted m-0 text-20"><i
+        class="text-20 text-primary i-Telephone mr-2"></i>
+      {{ customerDetails?.mobile_number }}</a>
+  </div>
+  <div class="card-body">
+    <ngb-tabset class="nav-center customer-list-tab" [activeId]="activeId">
+      <ngb-tab id="1">
+        <ng-template ngbTabTitle><i class="text-20 i-Address-Book mr-1"></i>
+          <span>Beneficiary List</span></ng-template>
+        <ng-template ngbTabContent>
+          <!-- Desktop -->
+
+          <div class="row">
+            <div class="col-md-4">
+              <input id="last_name" class="form-control icon" type="search" (keyup)="filterList()"
+                (change)="filterList()" [(ngModel)]="searchValues" placeholder="Enter to search from the datas" />
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+
+
+          <div class="table-responsive customer-bene-list bene-list-desktop mt-3">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Beneficiary Name</th>
+                  <th scope="col">Account Number</th>
+                  <th scope="col">IFSC Code</th>
+                  <th scope="col">Bank</th>
+                  <th scope="col">Validate</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Loader and No record found Section  -->
+                <tr *ngIf="!customerBeneficiaries.length && !beneListLoader" class="text-center">
+                  <td colspan="6">No Beneficiary Found</td>
+                </tr>
+                <tr *ngIf="!customerBeneficiaries.length && beneListLoader" class="text-center">
+                  <td colspan="6">
+                    <span class="loader-bubble loader-bubble-primary ml-4"></span>
+                  </td>
+                </tr>
+                <!--  -->
+                <ng-container *ngFor="let bene of customerBeneficiaries">
+                  <tr *ngIf="bene.payee_ref_id != 0">
+                    <th scope="row">
+                      {{ bene.payee_name ? bene.payee_name : "-" }}
+                    </th>
+                    <td>
+                      {{ bene.account_number ? bene.account_number : "-" }}
+                    </td>
+
+                    <td>{{ bene.ifsc_code ? bene.ifsc_code : "-" }}</td>
+                    <td>
+                      {{ bene.bank_name ? bene.bank_name : "-" }}
+                    </td>
+                    <td>
+                      <button *ngIf="bene.validated != 'True'" type="button"
+                        class="btn btn-sm btn-warning btn-rounded m-1" (click)="beneValidate(bene, 'list')">
+                        <i class="text-20 i-Checked-User"></i>
+                      </button>
+
+                      <button *ngIf="bene.validated == 'True'" type="button"
+                        class="btn btn-sm btn-success btn-rounded m-1">
+                        <i class="text-20 i-Checked-User"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-rounded m-1" (click)="payforBeneficiary(bene)">
+                        Pay
+                      </button>
+                      <button type="button" (click)="deleteBeneficiary(bene)"
+                        class="btn btn-sm btn-danger btn-rounded m-1">
+                        <i class="text-20 i-Delete-File"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <!-- Mobile View Bene List -->
+          <!-- Loader and No record found Section  -->
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 bene-list-mobile"
+            *ngIf="!customerBeneficiaries.length && !beneListLoader">
+            <div class="text-center m-2">No Beneficiary Found</div>
+          </div>
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 bene-list-mobile"
+            *ngIf="!customerBeneficiaries.length && beneListLoader">
+            <span class="loader-bubble loader-bubble-primary ml-4 m-3"></span>
+          </div>
+          <!--  -->
+          <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4 bene-list-mobile"
+            *ngFor="let bene of customerBeneficiaries">
+            <div class="card-body">
+              <div class="apt-bene-list">
+                <h6>
+                  <b>
+                    <a href="">{{
+                      bene.payee_name ? bene.payee_name : "-"
+                      }}</a></b>
+                </h6>
+                <p class="m-0 text-small text-muted">
+                  {{ bene.bank_name ? bene.bank_name : "-" }}
+                  <br />
+                  <span>{{
+                    bene.account_number ? bene.account_number : "-"
+                    }}</span>
+                  <br />
+                  <span>{{ bene.ifsc_code ? bene.ifsc_code : "-" }}</span>
+                </p>
+                <div class="mt-2">
+                  <button *ngIf="bene.validated != 'True'" type="button" class="btn btn-sm btn-warning btn-rounded m-1"
+                    (click)="beneValidate(bene, 'list')">
+                    <i class="text-10 i-Checked-User"></i>
+                  </button>
+
+                  <button *ngIf="bene.validated == 'True'" type="button" class="btn btn-sm btn-success btn-rounded m-1">
+                    <i class="text-10 i-Checked-User"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-primary btn-rounded m-1"
+                    (click)="payforBeneficiary(bene)">
+                    Pay
+                  </button>
+                  <button type="button" (click)="deleteBeneficiary(bene)" class="btn btn-sm btn-danger btn-rounded m-1">
+                    <i class="text-10 i-Delete-File"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="2">
+        <ng-template ngbTabTitle><i class="text-20 i-Add-User mr-1"></i>
+          <span>Add Beneficiary</span></ng-template>
+        <ng-template ngbTabContent>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="card-title mb-3">New Beneficiary Registration</div>
+                <form [formGroup]="beneficiaryRegitrationForm" (ngSubmit)="beneficiaryRegitrationSubmit()">
+                  <div class="row">
+                    <!--  Customer Name -->
+                    <div class="col-md-6 form-group mb-3">
+                      <label for="payee_name">Beneficiary Name</label>
+                      <input id="payee_name" autocomplete="off" class="form-control form-control-rounded"
+                        formControlName="payee_name" 
+                        ng-pattern="/^[a-zA-Z0-9]*$/" type="text" 
+                        [class.is-invalid]="
+                          payee_name.invalid &&
+                          (payee_name.dirty || payee_name.touched)
+                        " placeholder="Beneficiary name" />
+                      <div *ngIf="
+                          payee_name.invalid &&
+                          (payee_name.dirty || payee_name.touched)
+                        " class="invalid-feedback">
+                        <div *ngIf="payee_name.errors?.['required']">
+                          This field is required.
+                        </div>
+                        <div *ngIf="payee_name.errors?.['pattern']">
+                          This field is not allow special character.
+                        </div>
+                        <div *ngIf="payee_name.errors?.['minlength']">
+                          This field must have at least 5 character.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                      <label for="payee_name">Bank Type</label>
+                      <ngx-select-dropdown [config]="bankTypeConfig" [options]="bankTypeList" formControlName="bankType"
+                        (change)="getBankList($event)">
+                      </ngx-select-dropdown>
+                      <div *ngIf="
+                          bankType.invalid &&
+                          (bankType.dirty || bankType.touched)
+                        " class="invalid-feedback">
+                        <div *ngIf="bankType.errors?.['required']">
+                          This field is required.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                      <label for="payee_name">Bank Name</label>
+                      <ngx-select-dropdown [config]="bankListConfig" [options]="bankList" formControlName="bank_ref_id"
+                        (change)="showIfscCode($event)">
+                      </ngx-select-dropdown>
+                      <div *ngIf="
+                          bank_ref_id.invalid &&
+                          (bank_ref_id.dirty || bank_ref_id.touched)
+                        " class="invalid-feedback">
+                        <div *ngIf="bank_ref_id.errors?.['required']">
+                          This field is required.
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--  Mobile Number -->
+                    <!-- <div class="col-md-6 form-group mb-3">
+                      <label for="mobile_no">Mobile Number</label>
+                      <input
+                        id="mobile_no"
+                        class="form-control form-control-rounded"
+                        formControlName="mobile_no"
+                        type="text"
+                        minlength="10"
+                        [maxlength]="10"
+                        Decimalnumeric
+                        numericType="number"
+                        autocomplete="off"
+                        [class.is-invalid]="
+                          mobile_no.invalid &&
+                          (mobile_no.dirty || mobile_no.touched)
+                        "
+                        placeholder="Mobile number"
+                      />
+                      <div
+                        *ngIf="
+                          mobile_no.invalid &&
+                          (mobile_no.dirty || mobile_no.touched)
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="mobile_no.errors?.['required']">
+                          This field is required.
+                        </div>
+                        <div *ngIf="mobile_no.errors?.['minlength']">
+                          This field must have at least 1 character.
+                        </div>
+                        <div *ngIf="mobile_no.errors?.['maxlength']">
+                          This field must have at most 10 characters.
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="col-md-6 form-group mb-3">
+                      <label for="exampleInputEmail1">IFSC Code</label>
+                      <input class="form-control form-control-rounded" formControlName="ifsc_code" disabled
+                        placeholder="IFSC Code" type="text" autocomplete="off" minlength="11" [maxlength]="11"
+                        (keyup)="getIfscLookUpData($event.target.value)"
+                        (change)="getIfscLookUpData($event.target.value)" [class.is-invalid]="
+                          ifsc_code.invalid &&
+                          (ifsc_code.dirty || ifsc_code.touched)
+                        " />
+                      <div *ngIf="
+                          ifsc_code.invalid &&
+                          (ifsc_code.dirty || ifsc_code.touched)
+                        " class="invalid-feedback">
+                        <div *ngIf="ifsc_code.errors?.['required']">
+                          This field is required.
+                        </div>
+                        <div *ngIf="ifsc_code.errors?.['minlength']">
+                          This field must have at least 11 character.
+                        </div>
+                        <div *ngIf="ifsc_code.errors?.['maxlength']">
+                          This field must have at most 11 characters.
+                        </div>
+                      </div>
+                      <div class="mt-1 not-sure-ifsc" (click)="notSureIfsc()">
+                        Not sure IFSC?
+                      </div>
+                    </div>
+
+                    <!-- <div class="col-md-6 form-group mb-3">
+                      <label for="payee_name">Branch</label>
+                      <input
+                        class="form-control form-control-rounded"
+                        type="text"
+                        [value]="bankBranch"
+                        readonly
+                        placeholder="Bank branch"
+                      />
+                    </div> -->
+
+                    <!-- <div class="col-md-6 form-group mb-3">
+                      <label for="payee_name">Bank Address</label>
+                      <input
+                        class="form-control form-control-rounded"
+                        type="text"
+                        [value]="bankAddress"
+                        readonly
+                        placeholder="Bank address"
+                      />
+                    </div> -->
+                    <!-- numericType="number" -->
+                    <div class="col-md-6 form-group mb-3">
+                      <label for="account_number">Account Number</label>
+                      <input class="form-control form-control-rounded" id="account_number"
+                      oninput="this.value = this.value.toUpperCase()"
+                      [minlength]="minDigitAcc" [maxlength]="maxDigitAcc"
+                        formControlName="account_number" placeholder="Account Number" type="password" appBlockCopyPaste
+                          autocomplete="off" [class.is-invalid]="
+                          account_number.invalid &&
+                          (account_number.dirty || account_number.touched)
+                        " />
+                      <div *ngIf="
+                          account_number.invalid &&
+                          (account_number.dirty || account_number.touched)
+                        " class="invalid-feedback">
+                        <div *ngIf="account_number.errors?.['required']">
+                          This field is required.
+                        </div>
+                        <div *ngIf="account_number.errors?.['minlength']">
+                          This field must have at least
+                          {{ minDigitAcc }} character.
+                        </div>
+                        <div *ngIf="account_number.errors?.['maxlength']">
+                          This field must have at most
+                          {{ maxDigitAcc }} characters.
+                        </div>
+                        <div *ngIf="account_number.errors?.['pattern']">
+                          This field is not allow special character after 6 digits.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                      <label for="account_number">ReEnter Account Number</label>
+                      <input class="form-control form-control-rounded" id="confirm_account_number"
+                        formControlName="confirmAccountNumber" placeholder="Reenter Account Number" type="text"
+                        oninput="this.value = this.value.toUpperCase()"
+                        [minlength]="minDigitAcc" [maxlength]="maxDigitAcc" appBlockCopyPaste 
+                        autocomplete="off" [class.is-invalid]="
+                          confirmAccountNumber.invalid &&
+                          (confirmAccountNumber.dirty ||
+                            confirmAccountNumber.touched)
+                        " />
+                      <div class="invalid-feedback" *ngIf="beneficiaryRegitrationForm.errors?.['mismatch']">
+                        Account number is not matching
+                      </div>
+                      <div *ngIf="
+                          confirmAccountNumber.invalid &&
+                          (confirmAccountNumber.dirty ||
+                            confirmAccountNumber.touched)
+                        " class="invalid-feedback">
+                        <div *ngIf="confirmAccountNumber.errors?.['required']">
+                          This field is required.
+                        </div>
+                        <div *ngIf="confirmAccountNumber.errors?.['minlength']">
+                          This field must have at least
+                          {{ minDigitAcc }} character.
+                        </div>
+                        <div *ngIf="confirmAccountNumber.errors?.['maxlength']">
+                          This field must have at most
+                          {{ maxDigitAcc }} character.
+                        </div>
+                        <div *ngIf="confirmAccountNumber.errors?.['pattern']">
+                          This field is not allow special character after 6 digits.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 form-group mb-3">
+                      <!-- <label for="payee_name">Bank Name</label>
+                      <input
+                        class="form-control form-control-rounded"
+                        type="text"
+                        [value]="bankName"
+                        readonly
+                        placeholder="Bank name"
+                      />
+                      <br /> -->
+                      <button type="button" class="btn btn-sm {{
+                          beneValidateFormBtnClass
+                        }} btn-rounded m-1" [disabled]="beneValidateFormBtnClass === 'btn-success'"
+                        (click)="beneValidate(bene, 'form')">
+                        <i class="text-20 i-Checked-User"></i>
+                      </button>
+                      <span class="ml-2"
+                        *ngIf="beneValidateFormBtnClass === 'btn-success'"><strong>validated</strong></span>
+                    </div>
+
+                    <!-- <div class="col-md-6 form-group mb-3">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-warning btn-rounded m-1"
+                        (click)="beneValidate(bene, 'form')"
+                      >
+                        <i class="text-20 i-Checked-User"></i>
+                      </button>
+                    </div> -->
+
+                    <div class="col-md-12 text-center">
+                      <btn-loading btnClass="btn-primary btn-rounded" [loading]="loading">Submit</btn-loading>
+                      <button type="button" class="btn btn-warning btn-rounded m-1" (click)="formCancelRedirect()">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="3">
+        <ng-template ngbTabTitle (click)="searchTransaction()"><i class="text-20 i-Bar-Chart mr-1"></i>
+          <span>Sender Transaction Report</span></ng-template>
+        <ng-template ngbTabContent>
+          <div class="senderTransactionReport">
+            <div class="row senderTransactionReport">
+              <div class="col-lg-1 col-md-1"></div>
+              <div class="col-lg-12 col-md-12">
+                <div class="card mb-5 text-center">
+                  <div class="card-body">
+                    <div class="row row-xs">
+                      <div class="col-md-2 text-left">
+                        <label for="fromDate" class="mb-0">From Date</label>
+                        <mat-form-field class="atp-mat-date-picker">
+                          <input matInput [matDatepicker]="dp1" [(ngModel)]="fromDate" (click)="dp1.open()" />
+                          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                          <mat-datepicker #dp1></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2 text-left">
+                        <label for="toDate" class="mb-0">To Date</label>
+                        <mat-form-field class="atp-mat-date-picker">
+                          <input matInput [matDatepicker]="dp2" [(ngModel)]="toDate" (click)="dp2.open()" />
+                          <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                          <mat-datepicker #dp2></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <!-- <div class="col-md-2 text-left">
+                        <label for="searchBy">Search By</label>
+                        <ngx-select-dropdown
+                          [config]="searchByConfig"
+                          [options]="searchByList"
+                          [(ngModel)]="searchByDefaultValue"
+                        >
+                        </ngx-select-dropdown>
+                      </div>
+          
+                      <div class="col-md-3 text-left">
+                        <label for="searchBy">Value</label>
+                        <input
+                          id="last_name"
+                          class="form-control icon"
+                          type="search"
+                          [(ngModel)]="searchValue"
+                          placeholder="Enter selected search by value"
+                        />
+                      </div> -->
+                      <div class="col-md-2">
+                        <label for="searchBy">&nbsp;</label>
+                        <btn-loading (click)="searchTransaction()" btnClass="btn-primary btn-rounded btn-block"
+                          [loadingText]="reportSearchloadingText" [loading]="reportSearch">
+                          {{ reportSearchloadingText }}
+                        </btn-loading>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-1"></div>
+            </div>
+            <div *ngIf="!noRecordFlag && this.dataSource.data.length == 0" class="row norec"> No Record Found</div>
+            <div [ngClass]="changeClass()">
+
+              <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="reports-table">
+                <tr class="mat-row" *matNoDataRow>
+                  <td *ngIf="noRecordFlag" class="mat-cell text-center" [attr.colspan]="12">No Record Found</td>
+                </tr>
+
+                <ng-container matColumnDef="Transaction ID" *ngIf="displayedColumns.includes('Transaction ID')">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    Transaction ID
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="first-row">
+                    {{ element.transactionid }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Transaction Date">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    Transaction Date
+                  </th>
+                  <td mat-cell *matCellDef="let element">{{ element.createddate }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Customer Name">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="headers atp-report-th-header">
+                    Customer Name
+                  </th>
+                  <td mat-cell *matCellDef="let element">{{ element.customername }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Customer Mob.No">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="headers atp-report-th-header">
+                    Customer Mob.No
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.customermobileno }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Beneficiary Name">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="headers atp-report-th-header">
+                    Beneficiary Name
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.payeename ? element.payeename : "-" }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Bank">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="headers atp-report-th-header">
+                    Bank
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.bankname ? element.bankname : "-" }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Acc.No">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="headers atp-report-th-header">
+                    Acc.No
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.payeeaccountnumer }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Pay Mode">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    Pay Mode
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.paymode }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="RRN Number">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    RRN Number
+                  </th>
+                  <td mat-cell *matCellDef="let element">{{ element.bankreferencenumber ? element.bankreferencenumber :
+                    '-' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Response Code">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    Response Code
+                  </th>
+                  <td mat-cell *matCellDef="let element">{{ element.responsedescription ? element.responsedescription :
+                    "-" }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Amount">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    Amount
+                  </th>
+                  <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Transaction Status">
+                  <th mat-header-cell *matHeaderCellDef class="headers atp-report-th-header">
+                    Transaction Status
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.transactionstatus }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+
+
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

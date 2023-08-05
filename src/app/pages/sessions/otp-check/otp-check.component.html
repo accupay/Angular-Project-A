@@ -1,0 +1,96 @@
+<div class="top-nav-login">
+  <div class="logo1">
+    <img class="logo-1" src="./assets/images/icon.png" alt="" />
+  </div>
+  <div class="logo2">
+    <img class="logo-2" src="./assets/images/vyabari.jpg" alt="" />
+  </div>
+  <div class="top-nav-right">
+    <span class="phone"
+      ><i class="i-Telephone text-20"></i> 8447928988 &nbsp;&nbsp;&nbsp;</span
+    ><br />
+    <span>vyabari@accupaydtech.com</span>
+  </div>
+</div>
+
+<div class="login-container">
+  <main>
+    <section class="login bgImg">
+      <div class="col-md-12">
+        <div class="p-4">
+          <div class="auth-logo text-center mb-4 text-30">
+            <img src="assets/images/Accupayd_V2-01.png" alt="" />
+          </div>
+          <h1 class="mb-3 text-18">Enter OTP</h1>
+          <form [formGroup]="otpCheckForm" (ngSubmit)="otpCheck()">
+            <div class="form-group">
+              <input
+                id="apt_otp"
+                type="password"
+                class="form-control form-control-rounded"
+                formControlName="apt_otp"
+              />
+              <label class="checkbox checkbox-outline-primary mt-2">
+                <input (change)="showapt_otp()" type="checkbox" />
+                <span>Show Otp</span>
+                <span class="checkmark"></span>
+              </label>
+              <div
+                *ngIf="apt_otp.invalid && (apt_otp.dirty || apt_otp.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="apt_otp.errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="apt_otp.errors?.['minlength']">
+                  This field must have at least 15 characters.
+                </div>
+              </div>
+            </div>
+
+            <btn-loading
+              btnClass="btn-primary btn-rounded btn-block mt-3"
+              [loadingText]="loadingText"
+              [loading]="loading"
+            >
+              {{ loginButtonText }}
+            </btn-loading>
+          </form>
+        </div>
+        <div class="card mb-2">
+          <div class="card-body">
+            <h6 class="card-title mb-2">
+              <b>Don’t have an account with us?</b>
+            </h6>
+            <p class="card-text">
+              ACCUPAYD, the next generation B2B e-commerce portal. Single
+              wallet, multiple services and unlimited income opportunities. Join
+              Today!
+            </p>
+            <button class="btn btn-primary btn-rounded">SIGN UP</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wallpaper">
+      <div id="container">
+        Make
+        <div id="flip">
+          <div><div>Business!</div></div>
+          <div><div>Profit!</div></div>
+          <div><div>Relationship!</div></div>
+        </div>
+        <h1 class="welcome-text">Welcome to the ACCUPAYD Application!</h1>
+        <h1 class="welcome-text">
+          Grow Your <span class="business">Business</span> and Increase your
+          <span class="business">Profit!</span>
+        </h1>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="login-footer">
+  <p>Copyright © 2023 Accupayd. All Right Reserved</p>
+</div>

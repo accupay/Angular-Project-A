@@ -1,0 +1,87 @@
+<div [ngClass]="changeClass()">
+  <h2 class="confirm-transaction text-center h50">Payment Details 
+    <span  [ngClass]="!noRecordFlag ? 'nopad':'padd-33'">  <img class="imagewid" src="./assets/images/billpayment/B-Assured.png" /> </span></h2>
+  <br />
+
+  <div class="row">
+    <div class="col-md-12 ">
+      <div class="card ">
+        <div class="card-body">
+
+          <table class="text-left">
+            <tr class="tdFont">
+              <td class="text-primary">APT TRANS_ID:</td>
+              <td class="float-right">{{ fetchData.aptTransactionID ? fetchData?.aptTransactionID: "-" }}</td>
+            </tr>
+            <tr class="tdFont">
+              <td class="text-primary">BILLER TRANS_ID:</td>
+              <td class="float-right">{{ fetchData.billertransactionID ? fetchData?.billertransactionID: "-" }}</td>
+            </tr>
+
+            <tr class="tdFont">
+              <td class="text-primary">CUSTOMER NAME:</td>
+              <td class="float-right">{{ fetchData.customerName ? fetchData?.customerName: "-" }}</td>
+            </tr>
+
+            <tr class="tdFont">
+              <td class="text-primary">BILL NUMBER:</td>
+              <td class="float-right">{{ fetchData.billNumber ? fetchData?.billNumber: "-" }}</td>
+            </tr>
+
+            <tr class="tdFont">
+              <td class="text-primary">BILL DATE:</td>
+              <td class="float-right">{{ fetchData.billdate ? fetchData?.billdate: "-" }}</td>
+            </tr>
+
+            <tr class="tdFont">
+              <td class="text-primary">DUE DATE:</td>
+              <td class="float-right">{{ fetchData.duedate ? fetchData?.duedate: "-" }}</td>
+            </tr>
+
+            <tr class="tdFont">
+              <td class="text-primary">BILL PERIOD:</td>
+              <td class="float-right">{{ fetchData.billperiod ? fetchData?.billperiod: "-" }}</td>
+            </tr>
+
+            <tr class="tdFont">
+              <td class="text-primary">AMOUNT:</td>
+              <td class="float-right" *ngIf="!fetchData.amountEdit"><span >&#8377;</span>&nbsp;{{ fetchData.amount ? fetchData?.amount: "-" }}</td>
+              <td class="float-right" *ngIf="fetchData.amountEdit">
+                <form [formGroup]="billForm">
+                  <div class="col-md-12 form-group text-left">
+                    <span class="marleft-7" >&#8377;</span>
+                    <mat-form-field class="col-md-8">
+                      <!-- <label><span style="font-size: 28px">&#8377;</span></label> -->
+                      <input matInput placeholder="" class="bene-transaction-amount-input" formControlName="amount"
+                       type="number" [class.is-invalid]="
+                        amount.invalid && (amount.dirty || amount.touched)
+                      " />
+                    </mat-form-field>
+                    <div *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+                      class="invalid-feedback text-left">
+                      <div *ngIf="amount.errors?.['required']">
+                        Please enter the amount...
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </td>
+            </tr>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer bene-transaction-footer">
+  <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+    Cancel
+  </button>
+  <button type="button" class="btn btn-outline-primary btn-rounded" (click)="confirm()">
+    Bill Pay
+  </button>
+</div>

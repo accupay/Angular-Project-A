@@ -1,0 +1,350 @@
+<div [ngClass]="changeClass()" >
+  <!-- <div class="card  col-md-12"> -->
+
+    <div *ngIf="!noRecordFlag" class=" col-md-12">
+      <div class="float-right">
+        <img class="barathimagemobwid" src="./assets/images/billpayment/barathlogo.png"  />
+      </div>
+    </div>
+    <div class="col-md-11">
+
+      <mat-tab-group [(selectedIndex)]="selectedTab" (selectedTabChange)="onTabChanged($event);">
+        <mat-tab label="Bill Servies"  id="firstTab">
+          
+          <div class="col-md-12 mt-5">
+            <div class="container1">
+
+              <div class="img-container" (click)="selectedImg('Electricity')">
+                <img class="imagewid" src="./assets/images/billpayment/bulb.png"  />
+                <p class="p-change">Electricity</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Water')">
+                <img class="imagewid" src="./assets/images/billpayment/water.png"   />
+                <p class="p-change p-mintext">Water</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Gas')">
+                <img class="imagewid" src="./assets/images/billpayment/gas.png"  />
+                <p class="p-change ">Gas(Pipeline)</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('LPG GAS')">
+                <img class="imagewid" src="./assets/images/billpayment/lpg.png"   />
+                <p class="p-change p-mintext">LPG GAS</p>
+              </div>
+              <!-- <div class="img-container" (click)="selectedImg('DTH')">
+                <img class="imagewid" src="./assets/images/billpayment/dth.png"  />
+                <p class="p-change p-mintext">DTH</p>
+              </div> -->
+              <div class="img-container" (click)="selectedImg('FASTag')">
+                <img class="imagewid" src="./assets/images/billpayment/fastTag.png"  />
+                <p class="p-change p-mintext">FASTag</p>
+              </div>
+            
+              <div class="img-container" (click)="selectedImg('Mobile Postpaid')">
+                <img class="imagewid" src="./assets/images/billpayment/mobPostpaid.png"   />
+                <p class="p-change pad-30">Mobile Postpaid</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Landline Postpaid')">
+                <img class="imagewid" src="./assets/images/billpayment/landline.png"   />
+                <p class="p-change pad-30">Landline Postpaid</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Loan repayment')">
+                <img class="imagewid" src="./assets/images/billpayment/loan.png"   />
+                <p class="p-change">Loan repayment</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Broadband Postpaid')">
+                <img class="imagewid" src="./assets/images/billpayment/router.png"  />
+                <p class="p-change">Broadband Postpaid</p>
+              </div>
+              <!-- <div class="img-container" (click)="selectedImg('Mobile Prepaid')">
+                <img class="imagewid"  src="./assets/images/billpayment/prepaid.png"  />
+                <p class="p-change pad-30">Mobile Prepaid</p>
+              </div> -->
+              <div class="img-container" (click)="selectedImg('Mutual Fund')">
+                <img class="imagewid" src="./assets/images/billpayment/mutualfund.png"   />
+                <p class="p-change p-mintext">Mutual Fund</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Municipal Taxes')">
+                <img class="imagewid" src="./assets/images/billpayment/municipalTax.png"  />
+                <p class="p-change pad-30">Municipal Taxes</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Municipal Services')">
+                <img class="imagewid" src="./assets/images/billpayment/municipal.png"   />
+                <p class="p-change pad-30">Municipal Services</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Cable TV')">
+                <img class="imagewid" src="./assets/images/billpayment/tv.png"  />
+                <p class="p-change p-mintext">Cable TV</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Recurring Deposits')">
+                <img class="imagewid" src="./assets/images/billpayment/requireDeposit.png"   />
+                <p class="p-change">Recurring Deposits</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Credit Card')">
+                <img class="imagewid" src="./assets/images/billpayment/creditcard.png"   />
+                <p class="p-change p-mintext">Credit Card</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Insurance')">
+                <img class="imagewid" src="./assets/images/billpayment/insurance.png"  />
+                <p class="p-change">Insurance</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('General Insurance')">
+                <img class="imagewid" src="./assets/images/billpayment/generalins.png"   />
+                <p class="p-change">General Insurance</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Health Insurance')">
+                <img class="imagewid" src="./assets/images/billpayment/health.png"  />
+                <p class="p-change">Health Insurance</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Life Insurance')">
+                <img class="imagewid" src="./assets/images/billpayment/lifeins.png"  />
+                <p class="p-change ">Life Insurance</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Housing Society')">
+                <img class="imagewid" src="./assets/images/billpayment/housing.png"   />
+                <p class="p-change pad-30">Housing Society</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Education Fees')">
+                <img class="imagewid" src="./assets/images/billpayment/education.png"  />
+                <p class="p-change">Education Fees</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Hospital')">
+                <img class="imagewid" src="./assets/images/billpayment/hospital.png"  />
+                <p class="p-change pad-30">Hospital</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Hospital and Pathology')">
+                <img class="imagewid" src="./assets/images/billpayment/pathology.png"   />
+                <p class="p-change">Hospital and Pathology</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Subscription Fees (Digital)')">
+                <img class="imagewid" src="./assets/images/billpayment/digitalsubs.png"   />
+                <p class="p-change">Subscription Fees (Digital)</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Subscription Fees (Offline)')">
+                <img class="imagewid" src="./assets/images/billpayment/offlinesubs.png"  />
+                <p class="p-change">Subscription Fees (Offline)</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Subscription')">
+                <img class="imagewid" src="./assets/images/billpayment/subscribe.png"   />
+                <p class="p-change">Subscription</p>
+              </div>
+              <div class="img-container" (click)="selectedImg('Clubs & Associations ')">
+                <img class="imagewid" src="./assets/images/billpayment/club.png"  />
+                <p class="p-change ">Clubs & Associations </p>
+              </div>
+              
+            </div>
+          <!-- </div> -->
+        </div>
+        
+        
+        
+        </mat-tab>
+        <mat-tab label="{{detailText}}" id="secondTab" [disabled]="!nextTabFlag"> 
+          <div class="row mt-4 maradj">
+            <div *ngIf="custDetailFlag" class="col-md-4 mt-3">
+              <div class="card mb-4 h-100">
+                <div class="card-header bg-color">
+                  <h5 class="text-white"><b>Customer Details</b></h5>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="customerForm">
+                    <div class="row">
+                      <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput placeholder="Enter mobile number" formControlName="mobile_no" id="mobile_no"
+                          (change)="validateNo()" (blur)="validateNo()" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+      
+                        <!-- <mat-icon matSuffix>phone_iphone</mat-icon> -->
+                        <mat-error *ngIf="myError('customerForm','mobile_no', 'required')">Mobile number is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('customerForm','mobile_no', 'maxlength')">This field must have at most 10
+                          digits.</mat-error>
+                        <mat-error *ngIf="myError('customerForm','mobile_no', 'minlength')"> This field must have at least 10
+                          digits.</mat-error>
+                        <mat-error *ngIf="myError('customerForm','mobile_no', 'pattern')">Please Start with 6-9 </mat-error>
+      
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="row mt-4"> -->
+      
+      
+                    <div class="col-md-12 form-group mb-3">
+                      <label for="location">location</label>
+                      <ngx-select-dropdown [config]="stateListConfig" [options]="stateList" formControlName="location"
+                        (change)="selectState($event)">
+                      </ngx-select-dropdown>
+                      <!-- <div *ngIf="
+                          location.invalid &&
+                            (location.dirty || location.touched)
+                          " class="invalid-feedback">
+                        <div *ngIf="location.errors?.['required']">
+                          This field is required.
+                        </div>
+                      </div> -->
+                    </div>
+      
+      
+                    <!-- <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Select Location</mat-label>
+                        <mat-select placeholder="--select--" formControlName="location" id="location"
+                           (selectionChange)="selectState($event)">
+                          <mat-option>--select--</mat-option>
+                          <mat-option *ngFor="let data of stateList" value="{{data.state}}">{{data.state}}</mat-option>
+                      
+                        </mat-select>
+                        <mat-error *ngIf="myError('customerForm','location', 'required')">This is required</mat-error>
+                      </mat-form-field> -->
+                    <!-- </div> -->
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="billerflag" class="col-md-4 mt-3">
+              <div class="card mb-4 h-100">
+                <div class="card-header bg-color">
+                  <h5 class="text-white"><b>Select Biller</b></h5>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="BillerForm">
+                    <div class="row">
+      
+                      <div class="col-md-12 form-group mb-3">
+                        <label for="billerval">Select Billers</label>
+                        <ngx-select-dropdown [config]="billerListConfig" [options]="billerList" formControlName="billerval"
+                          (change)="billerselect($event)">
+                        </ngx-select-dropdown>
+                        <div *ngIf="
+                          billerval.invalid &&
+                            (billerval.dirty || billerval.touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="billerval.errors?.['required']">
+                            This field is required.
+                          </div>
+                        </div>
+                      </div>
+      
+      
+                      <!-- <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Select Billers</mat-label>
+                        <mat-select placeholder="--select--" formControlName="billerval" id="billerval"
+                          (selectionChange)="billerselect($event)">
+                          <mat-option>--select--</mat-option>
+                          <mat-option *ngFor="let data of billerList"
+                            value="{{data.billerName}}">{{data.billerName}}</mat-option>
+                        
+                        </mat-select>
+                        <mat-error *ngIf="myError('BillerForm','billerval', 'required')">This is required</mat-error>
+                      </mat-form-field> -->
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="billerdataflag" class="col-md-4 mt-3">
+              <div class="card mb-4 h-100">
+                <div class="card-header bg-color">
+                  <h5 class="text-white"><b>Bill Details</b></h5>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="billerDataForm">
+                    <div class="row">
+                      <!-- IFSC CODE -->
+                      <!-- &nbsp;&nbsp;
+                        <mat-form-field  class="mt-2">
+                          <input matInput placeholder="IFSC Code" formControlName="ifscCode" type="text" />
+                        </mat-form-field>
+                        &nbsp; <span style="color: red; cursor: pointer !important;" (click)="notSureIfsc()">Select IFSC?</span>
+                       -->
+      
+                      <mat-form-field appearance="outline" class="col-12" *ngIf="billerData.textboxDescription1 !==''">
+                        <mat-label>{{billerData.textboxDescription1}}</mat-label>
+                        <input matInput placeholder="Enter {{billerData.textboxDescription1}}" formControlName="bpnumber1"
+                          id="bpnumber1">
+      
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber1', 'required')">This field is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber1', 'minlength')">Min length is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber1', 'maxlength')">Max length Exited</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber1', 'pattern')">Invalid Pattern</mat-error>
+                      </mat-form-field>
+      
+                    </div>
+                    <div class="row">
+                      <mat-form-field appearance="outline" class="col-12" *ngIf="billerData.textboxDescription2 !==''">
+                        <mat-label>{{billerData.textboxDescription2}}</mat-label>
+                        <input matInput placeholder="Enter {{billerData.textboxDescription2}}" formControlName="bpnumber2"
+                          id="bpnumber2">
+      
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber2', 'required')">This field is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber2', 'minlength')">Min length is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber2', 'maxlength')">Max length Exited</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber2', 'pattern')">Invalid Pattern</mat-error>
+      
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="col-12" *ngIf="billerData.textboxDescription3 !==''">
+                        <mat-label>{{billerData.textboxDescription3}}</mat-label>
+                        <input matInput placeholder="Enter {{billerData.textboxDescription3}}" formControlName="bpnumber3"
+                          id="bpnumber3">
+      
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber3', 'required')">This field is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber3', 'minlength')">Min length is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber3', 'maxlength')">Max length Exited</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber3', 'pattern')">Invalid Pattern</mat-error>
+      
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="col-12" *ngIf="billerData.textboxDescription4 !==''">
+                        <mat-label>{{billerData.textboxDescription4}}</mat-label>
+                        <input matInput placeholder="Enter {{billerData.textboxDescription4}}" formControlName="bpnumber4"
+                          id="bpnumber4">
+      
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber4', 'required')">This field is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber4', 'minlength')">Min length is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber4', 'maxlength')">Max length Exited</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber4', 'pattern')">Invalid Pattern</mat-error>
+                      </mat-form-field>
+      
+                      <mat-form-field appearance="outline" class="col-12" *ngIf="billerData.textboxDescription5 !==''">
+                        <mat-label>{{billerData.textboxDescription5}}</mat-label>
+                        <input matInput placeholder="Enter {{billerData.textboxDescription5}}" formControlName="bpnumber5"
+                          id="bpnumber5">
+      
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber5', 'required')">This field is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber5', 'minlength')">Min length is
+                          required</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber5', 'maxlength')">Max length Exited</mat-error>
+                        <mat-error *ngIf="myError('billerDataForm','bpnumber5', 'pattern')">Invalid Pattern</mat-error>
+      
+                      </mat-form-field>
+                    </div>
+      
+                    <div class="col-12 text-center">
+                      <button class="bg-color" mat-raised-button (click)="fetchmethod()" color="primary">Fetch Bill</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+         </mat-tab>
+      </mat-tab-group>
+           
+    </div>
+    <div *ngIf="noRecordFlag" class="col-md-1">
+      <div class="float-right">
+        <img class="barathimagewid" src="./assets/images/billpayment/barathlogo.png"  />
+      </div>
+    </div>
+    
+
+  
+</div>

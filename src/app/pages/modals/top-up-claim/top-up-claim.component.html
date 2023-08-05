@@ -1,0 +1,155 @@
+<div class="modal-body">
+  <h5>Top up Claim</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-12 mb-3">
+        <form [formGroup]="claimTopupForm">
+          <!-- <div class="col-md-12 form-group mb-3">
+            <label for="city">Bank Type</label>
+             <ngx-select-dropdown
+              [config]="bankTypeConfig"
+              [options]="bankTypeList"
+              formControlName="bankType"
+              (change)="getBankList($event.value.id)"
+            >
+            </ngx-select-dropdown> 
+          </div> -->
+
+          <!-- <hr /> -->
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="bank">Bank</label>
+              <ngx-select-dropdown [config]="bankListConfig" [options]="bankList" formControlName="bank_ref_id"
+                (change)="selectBank($event.value.bank_name)">
+              </ngx-select-dropdown>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="accountNumber">Account Number</label>
+              <input class="form-control form-control-rounded" formControlName="account_number"
+                [(ngModel)]="accountNumber" disabled placeholder="Account Number" type="text" autocomplete="off" />
+              <div *ngIf="accountNumberflag" style="color: red;">
+                No records in Top Up.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="deposited_mode">Deposit Mode</label>
+              <ngx-select-dropdown [config]="depositedModeListConfig" [options]="depositedModeList"
+                formControlName="topup_type_refid">
+              </ngx-select-dropdown>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="transaction_id">Transaction Id</label>
+              <input class="form-control form-control-rounded" formControlName="transaction_id"
+                [class.is-invalid]=" transaction_id.invalid && (transaction_id.dirty || transaction_id.touched)"
+                [(ngModel)]="transactionId" placeholder="Transaction Id" type="text" autocomplete="off" />
+
+              <div *ngIf="transaction_id.invalid && (transaction_id.dirty || transaction_id.touched)"
+                class="invalid-feedback text-center">
+                <div *ngIf="transaction_id.errors?.['required']">
+                  This feild reqired.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- [min]="maxDate"  -->
+          <!-- <div class="col-md-12 form-group mb-3">
+            <label for="deposited date">Deposited Date:</label>
+            <mat-form-field class="atp-mat-date-picker dateClass">
+              <input matInput formControlName="depositedDate" [matDatepicker]="dp1" [(ngModel)]="deposited_date"
+              [max]="maxDate"
+                (click)="dp1.open()" />
+              <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+              <mat-datepicker #dp1></mat-datepicker>
+            </mat-form-field>
+          </div> -->
+
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="deposited date">Deposit Date:</label>
+              <mat-form-field class="atp-mat-date-picker ">
+                <input matInput formControlName="depositedDate" [matDatepicker]="dp1" [(ngModel)]="deposited_date"
+                  [max]="maxDate" (click)="dp1.open()" />
+                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="deposited Time">Deposit Time</label>
+              <mat-form-field id="timeId"> <input matInput aria-label="default time" [ngxTimepicker]="defaultValue"
+                  [format]="24" [value]="'00:00'" [(ngModel)]="time" formControlName="timeval" />
+                <ngx-material-timepicker #defaultValue>
+                </ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group mb-3 text-right">
+              <label for="amount">Amount:</label>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <input class="form-control form-control-rounded" formControlName="amount" [(ngModel)]="amount1"
+                class="form-control form-control-rounded" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                [class.is-invalid]="
+              amount.invalid && (amount.dirty || amount.touched)
+            " placeholder="Amount" type="text" autocomplete="off" />
+
+              <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="invalid-feedback text-center">
+                <div *ngIf="amount.errors?.['required']">
+                  This feild reqired.
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- <div class="col-md-12 form-group mb-3">
+            <label for="amount">Amount</label>
+            <input class="form-control form-control-rounded" formControlName="amount" [(ngModel)]="amount1"
+              placeholder="Amount" type="text" autocomplete="off" />
+
+          </div>-->
+
+          <div class="col-md-12 form-group mb-3">
+            <label for="deposited date">Comments</label>
+            <textarea class="form-control form-control-rounded" formControlName="notes" placeholder="Notes"
+              max-rows="6">
+            </textarea>
+
+          </div>
+
+          <div class="col-md-12 form-group mt-3">
+            <label for="fileUpload">Deposit slip Upload</label><br>
+            <input formControlName="file" (change)="GetFileOnLoad($event)" type="file" id="fileUpload"><br>
+            <!-- <span style="color: blue;">Note: please attach Bank Pass Book or cheque file</span> -->
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+
+  <button type="button" class="btn btn-primary btn-rounded" (click)="claim(claimTopupForm)">
+    Claim
+  </button>
+  <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+    Close
+  </button>
+
+</div>

@@ -1,0 +1,61 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <span class="text-primary font-italic font-weight-bold h4">Coming soon.!!!</span>
+          </div>
+        </div>
+     </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12">
+      <div class="card mb-4 ">
+          <div class="card-body">
+              <form [formGroup]="collectionForm" (ngSubmit)="submitbill()">
+                  <div class="row">
+                      <mat-form-field appearance="outline" class="col-md-4">
+                          <mat-label>Select Billers</mat-label>
+                          <input type="text"
+                                 placeholder=""
+                                 matInput
+                                 [formControl]="myControl"
+                                 [matAutocomplete]="auto"
+                                
+                              
+                                 
+                                 >
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                      </mat-form-field>
+                  </div>
+                  <div class="row" *ngIf="!myControl.invalid">
+                      <mat-form-field appearance="outline" class="col-md-4" >
+                          <mat-label>Customer Id</mat-label>
+                          <input matInput placeholder="Enter Customer Id" formControlName="customer_no"
+                              id="customer_no">
+
+                          <mat-error *ngIf="myError('customer_no', 'required')">customer_no is
+                              required</mat-error>
+
+                      </mat-form-field>
+                  
+                        
+
+                         
+                  </div>
+
+                  <div class="col-md-12">
+                      <button class="bg-color"  mat-raised-button
+                      color="primary">Verify</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div> -->
+

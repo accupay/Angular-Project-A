@@ -1,0 +1,124 @@
+@import "/src/assets/styles/app/globals/mat-table-responsive";
+.apt-customer-list {
+  .tab-content {
+    padding: 0 !important;
+  }
+  .customer-bene-list {
+    // border-radius: 14px !important;
+    border: 1px solid #ddd;
+    thead {
+      font-size: 15px;
+      th {
+        color: #ffffff !important;
+        background-color: #1B3280 !important;
+      }
+    }
+  }
+
+  .customer-list-tab {
+    .nav-item {
+      .nav-link {
+        font-weight: 800;
+      }
+    }
+  }
+  .not-sure-ifsc {
+    color: #e9872f;
+    cursor: pointer;
+  }
+
+  .delete-beneficiary {
+    // text-decoration: underline !important;
+    cursor: pointer;
+  }
+}
+
+.ifsc-mob-left {
+  margin-left: 31px;
+}
+
+.bene-list-mobile {
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+  .bene-list-mobile {
+    display: block;
+  }
+  .bene-list-desktop {
+    display: none;
+  }
+}
+table {
+      width: 100%;
+    }
+
+    .example{
+      padding: 0%;
+    }
+// .senderTransactionReport {
+//   table {
+//     width: 100%;
+//   }
+
+//   .mat-column-actions {
+//     text-align: right;
+//   }
+
+//   .atp-mat-date-picker {
+//     width: 100%;
+//   }
+
+//   .reports-table {
+//     .headers {
+//       font-size: 15px;
+//       color: #1172b3;
+//     }
+//     .first-row {
+//       font-weight: 700;
+//       color: #1172b3;
+//     }
+//   }
+
+//   // Mobile view scrollable and alignment
+//   .mat-table {
+//     width: 100%;
+//   }
+//   .mat-cell,
+//   .mat-header-cell {
+//     word-wrap: initial;
+//     display: table-cell;
+//     padding: 0px 10px;
+//     line-break: unset;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     vertical-align: middle;
+//   }
+//   .mat-row,
+//   .mat-header-row {
+//     display: table-row;
+//   }
+//   .example {
+//     width: 100%;
+//     overflow-x: scroll;
+//     height: calc(100vh - 32px);
+//     -webkit-overflow-scrolling: touch;
+//   }
+// }
+
+.mat-tooltip-trigger {
+  touch-action: auto !important;
+}
+
+[mat-list-item]{
+  touch-action: auto !important;
+}
+
+.norec{
+  font-weight: bold;
+  padding: 15px 0 15px 35% !important;
+  color: red;
+}
+
+.mat-header-row {
+  display: none;
+}

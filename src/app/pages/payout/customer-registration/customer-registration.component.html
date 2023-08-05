@@ -1,0 +1,319 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <form
+          [formGroup]="customerRegitrationForm"
+          (ngSubmit)="customerRegitrationSubmit()"
+        >
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="customer_name">Name</label>
+              <input
+                id="customer_name"
+                class="form-control form-control-rounded"
+                formControlName="customer_name"
+                type="text"
+                autocomplete="off"
+                [class.is-invalid]="
+                  customer_name.invalid &&
+                  (customer_name.dirty || customer_name.touched)
+                "
+                placeholder="Name"
+              />
+              <div
+                *ngIf="
+                  customer_name.invalid &&
+                  (customer_name.dirty || customer_name.touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="customer_name.errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="customer_name.errors?.['pattern']">
+                  This field is not allow special character.
+                </div>
+                <div *ngIf="customer_name.errors?.['minlength']">
+                  This field must have at least 5 character.
+                </div>
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <!-- <div class="col-md-6 form-group mb-3 hidden">
+              <label for="last_name">Last Name</label>
+              <input
+                id="last_name"
+                class="form-control form-control-rounded"
+                formControlName="last_name"
+                type="text"
+                autocomplete="off"
+                [class.is-invalid]="
+                  last_name.invalid && (last_name.dirty || last_name.touched)
+                "
+                placeholder="Last name"
+              />
+              <div
+                *ngIf="
+                  last_name.invalid && (last_name.dirty || last_name.touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="last_name.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div> -->
+
+            <!--  Mobile Number -->
+            <div class="col-md-6 form-group mb-3">
+              <label for="mobile_no">Mobile Number</label>
+              <input
+                id="mobile_no"
+                class="form-control form-control-rounded"
+                formControlName="mobile_no"
+                type="text"
+                [minlength]="10"
+                [maxlength]="10"
+                autocomplete="off"
+                Decimalnumeric
+                numericType="number"
+                [class.is-invalid]="
+                  mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)
+                "
+                placeholder="Mobile number"
+              />
+              <div
+                *ngIf="
+                  mobile_no.invalid && (mobile_no.dirty || mobile_no.touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="mobile_no.errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="mobile_no.errors?.['minlength']">
+                  This field must have at least 10 character.
+                </div>
+                <div *ngIf="mobile_no.errors?.['maxlength']">
+                  This field must have at most 10 characters.
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-6 form-group mb-3">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                class="form-control form-control-rounded"
+                formControlName="email"
+                autocomplete="off"
+                type="text"
+                [class.is-invalid]="
+                  email.invalid && (email.dirty || email.touched)
+                "
+                placeholder="Email address"
+              />
+              <div
+                *ngIf="email.invalid && (email.dirty || email.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="email.errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="email.errors?.['email']">
+                  Email address is invalid
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="address1">Address</label>
+              <input
+                id="address1"
+                class="form-control form-control-rounded"
+                formControlName="address1"
+                autocomplete="off"
+                type="text"
+                [class.is-invalid]="
+                  address1.invalid && (address1.dirty || address1.touched)
+                "
+                placeholder="Address"
+              />
+              <div
+                *ngIf="address1.invalid && (address1.dirty || address1.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="address1.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-6 form-group mb-3">
+              <label for="credit">Address line 2</label>
+              <input
+                class="form-control form-control-rounded"
+                id="credit"
+                autocomplete="off"
+                placeholder="Address line 2"
+              />
+            </div>
+
+            <div class="col-md-3 form-group mb-3">
+              <label for="picker1">Date of Birth</label>
+              <mat-form-field class="atp-mat-date-picker">
+                <input
+                  matInput
+                  [matDatepicker]="dp1"
+                  [max]="today"
+                  (click)="dp1.open()"
+                  formControlName="dob"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dp1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+              </mat-form-field>
+
+              <div
+                *ngIf="dob.invalid && (dob.dirty || dob.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="dob.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="col-md-3 form-group mb-3">
+              <label for="gender">Gender</label>
+              <div class="card-body">
+                <div class="row">
+                  <label class="radio radio-primary mr-2">
+                    <input type="radio" value="Male" formControlName="gender" />
+                    <span>Male</span>
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="radio radio-secondary mr-2">
+                    <input
+                      type="radio"
+                      value="Female"
+                      formControlName="gender"
+                    />
+                    <span>Female</span>
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="radio radio-success mr-2">
+                    <input
+                      type="radio"
+                      value="Others"
+                      formControlName="gender"
+                    />
+                    <span>Others</span>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="pincode">Pincode</label>
+              <input
+                class="form-control form-control-rounded"
+                id="credit"
+                placeholder="Pincode"
+                autocomplete="off"
+                formControlName="pincode"
+                (keyup)="pinCodeSubmit($event.target.value)"
+              />
+              <div
+                *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="pincode.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-6 form-group mb-3">
+              <label for="area">Area</label>
+              <ngx-select-dropdown
+                [config]="areaConfig"
+                [options]="areaList"
+                formControlName="area"
+                (change)="selectDistrictState($event)"
+              >
+              </ngx-select-dropdown>
+              <div
+                *ngIf="area.invalid && (area.dirty || area.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="area.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="city">District</label>
+              <ngx-select-dropdown
+                [config]="districtConfig"
+                [options]="districtList"
+                formControlName="city"
+              >
+              </ngx-select-dropdown>
+              <div
+                *ngIf="city.invalid && (city.dirty || city.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="city.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-md-6 form-group mb-3">
+              <label for="state">State</label>
+              <ngx-select-dropdown
+                [config]="stateConfig"
+                [options]="stateList"
+                formControlName="state"
+              >
+              </ngx-select-dropdown>
+              <div
+                *ngIf="state.invalid && (state.dirty || state.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="state.errors?.['required']">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <btn-loading
+                btnClass="btn-primary btn-rounded"
+                [loadingText]="loadingText"
+                [loading]="loading"
+              >
+                {{ loadingText }}
+              </btn-loading>
+
+              <button
+                type="button"
+                class="btn btn-warning btn-rounded m-1"
+                [routerLink]="['/payout']"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,192 @@
+<div class="modal-body">
+  <h5 *ngIf="profileOrSupport === 'profile'">Profile Details</h5>
+  <h5 *ngIf="profileOrSupport === 'support'">Support Informations</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <div class="col-12">
+          <div *ngIf="profileOrSupport === 'profile'">
+            <div
+              class="list-group mb-4"
+              id="list-tab"
+              role="tablist"
+              
+            >
+              <a
+                class="list-group-item list-group-item-action active"
+                href="javascript:void(0)"
+                >Profile Information</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                href="javascript:void(0)"
+              >
+                Name :
+                {{ retailerLookUp.retailer_name ? retailerLookUp.retailer_name : "-" }}</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                href="javascript:void(0)"
+                >Mobile No :
+                {{ retailerLookUp.mobile_number ? retailerLookUp.mobile_number : "-" }}</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                href="javascript:void(0)"
+              >
+                Email : {{ retailerLookUp.email ? retailerLookUp.email : "-" }}</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                href="javascript:void(0)"
+              >
+                Address : {{ retailerLookUp.address1 ? retailerLookUp.address1 : "-" }}</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                href="javascript:void(0)"
+              >
+                Pan No : {{ retailerLookUp.pan ? retailerLookUp.pan : "-" }}</a
+              >
+            </div>
+          </div>
+        
+          <div
+            class="list-group mb-4"
+            *ngIf="profileOrSupport === 'support'"
+            id="list-tab"
+            role="tablist"
+          >
+            <a
+              class="list-group-item list-group-item-action active"
+              href="javascript:void(0)"
+              >Company Information</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+            >
+              {{
+                profileSupportData?.company_info?.company_info
+                  ? profileSupportData?.company_info?.company_info
+                  : "-"
+              }}</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+              >{{
+                profileSupportData?.company_info?.email_id
+                  ? profileSupportData?.company_info?.email_id
+                  : "-"
+              }}</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+            >
+              {{
+                profileSupportData?.company_info?.mobile_number
+                  ? profileSupportData?.company_info?.mobile_number
+                  : "-"
+              }}</a
+            >
+          </div>
+         
+          <div
+            class="list-group mb-4"
+            *ngIf="profileOrSupport === 'support'"
+            id="list-tab"
+            role="tablist"
+          >
+            <a
+              class="list-group-item list-group-item-action active"
+              href="javascript:void(0)"
+              >Distributor Information</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+            >
+              {{
+                profileSupportData?.dist_info?.distributor_info
+                  ? profileSupportData?.dist_info?.distributor_info
+                  : "-"
+              }}</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+              >{{
+                profileSupportData?.dist_info?.mobile_number
+                  ? profileSupportData?.dist_info?.mobile_number
+                  : "-"
+              }}</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+            >
+              {{
+                profileSupportData?.dist_info?.name
+                  ? profileSupportData?.dist_info?.name
+                  : "-"
+              }}</a
+            >
+          </div>
+          <div
+            class="list-group mb-4"
+            *ngIf="profileOrSupport === 'support'"
+            id="list-tab"
+            role="tablist"
+          >
+            <a
+              class="list-group-item list-group-item-action active"
+              href="javascript:void(0)"
+              >Staff Information</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+            >
+              {{
+                profileSupportData?.staff_info?.name
+                  ? profileSupportData?.staff_info?.name
+                  : "-"
+              }}</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+              >{{
+                profileSupportData?.staff_info?.staff_info
+                  ? profileSupportData?.staff_info?.staff_info
+                  : "-"
+              }}</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="javascript:void(0)"
+            >
+              {{
+                profileSupportData?.staff_info?.mobile_number
+                  ? profileSupportData?.staff_info?.mobile_number
+                  : "-"
+              }}</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-secondary btn-rounded"
+    (click)="close()"
+  >
+    Close
+  </button>
+</div>

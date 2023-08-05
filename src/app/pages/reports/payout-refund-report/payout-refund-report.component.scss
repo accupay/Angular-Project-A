@@ -1,0 +1,24 @@
+@import "/src/assets/styles/app/globals/mat-table-responsive";
+.export-button {
+  text-align: right;
+}
+
+.norec{
+  font-weight: bold;
+  padding: 15px 0 15px 35% !important;
+  color: red;
+}
+
+
+.mat-tooltip-trigger {
+  touch-action: auto !important;
+}
+
+[mat-list-item]{
+  touch-action: auto !important;
+}
+
+.scrollClass{
+  touch-action: auto !important;
+  // overflow-y: auto !important;
+}

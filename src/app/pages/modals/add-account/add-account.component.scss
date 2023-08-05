@@ -1,0 +1,138 @@
+.resent-otp {
+  .resend-text {
+    color: #e9872f;
+  }
+  .active-link {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .in-active-link {
+    font-weight: 600;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.bene-transaction-footer {
+  justify-content: center;
+}
+
+.bene-autofocus-hidden {
+  display: none;
+}
+.bene-transaction-amount-input {
+  font-size: 32px !important;
+  text-align: center !important;
+}
+
+// .mat-form-field-appearance-outline .mat-form-field-outline {
+//   color: white;
+// }
+// /* Font color */
+// input.mat-input-element {
+//   color: white;
+// }
+
+// .confirm-transaction {
+//   text-align: center;
+// }
+
+// Price Selection
+
+.donate-now {
+  list-style-type: none;
+  margin: 25px 0 0 0;
+  padding: 0;
+}
+
+.donate-now li {
+  float: left;
+  margin: 0 5px 0 0;
+  width: 100px;
+  height: 40px;
+  position: relative;
+  color: black;
+}
+
+.donate-now label,
+.donate-now input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: black;
+}
+
+.donate-now input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
+}
+
+.donate-now input[type="radio"]:checked + label {
+  background: #5395ce;
+  color: white;
+}
+
+.donate-now label {
+  padding: 5px;
+  border: 1px solid #ccc;
+  color: black;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 90;
+}
+
+.donate-now label:hover {
+  background: #ddd;
+}
+
+.bene-transaction-pay-mode {
+  display: flex;
+  justify-content: center;
+}
+
+//
+
+.radio-toolbar {
+  margin-left: 25px;
+}
+.radio-toolbar input[type="radio"] {
+  display: none;
+}
+
+.radio-toolbar label {
+  display: inline-block;
+  background-color: #ddd;
+  padding: 4px 20px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+  background-color: #5395ce;
+  color: white;
+}
+mat-form-field{
+  width: 63%;
+}
+.mat-input-element:disabled{
+  color: black;
+}
+
+input[type=file]::file-selector-button {
+  border: 2px solid #6c5ce7;
+  padding: .2em .4em;
+  border-radius: .2em;
+  background-color: blue;
+  transition: 1s;
+  color: #ddd;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: darkblue;
+  border: 2px solid white;
+}

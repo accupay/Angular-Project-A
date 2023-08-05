@@ -1,0 +1,145 @@
+<div class="modal-body" *ngIf="verifyFlag">
+
+  <h5>Please Enter your T-PIN</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-12 mb-3">
+        <form [formGroup]="verificationForm">
+        <div class="form-group">
+          <div class="col-md-12 form-group mb-3" *ngIf="!otpEnable">
+            <!-- <label for="city">T-Pin or Otp</label><br> -->
+            <input
+            type="radio"
+            id="pinRadio1"
+            name="radios"
+            value="T-PIN" checked
+            (change)="selectedType($event.target.value)"
+          />
+          <label for="pinRadio1" class="mr-3"
+            ><span style="font-size: 15px"></span>T-Pin</label
+          >
+          
+          <input
+            type="radio"
+            id="pinRadio2"
+            name="radios"
+            (change)="selectedType($event.target.value)"
+            value="Otp"
+          />
+          <label for="pinRadio2" class="mr-3"
+            ><span style="font-size: 15px"></span>OTP</label
+          >
+            <!-- <label for="city">Verification Type</label>
+            <ngx-select-dropdown
+              [config]="verificationType"
+              [options]="verifyList"
+              (change)="selectedType($event)"
+            > 
+            </ngx-select-dropdown>  -->
+            <div class="mt-3" *ngIf="pinCkeck">
+              <label for="newPin">PIN Number</label>
+              
+              <input class="form-control form-control-rounded" [(ngModel)]="verify_pin" id="verify_pin_value"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+               name="verify_pin_value" placeholder="verify PIN" type="text"  [maxlength]="6" />
+               <br><span class="text-danger" (click)="forgotPin()" style="font-size: 15px; cursor: pointer">Forgot pin?</span>
+            </div>
+           <div class="mt-3" *ngIf="otpCkeck">
+            <label for="newPin">OTP Number</label>
+            <input class="form-control form-control-rounded" [(ngModel)]="otp_pin" id="verify_otp_value"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+            name="verify_otp_value"  placeholder="Otp Number" type="text" [maxlength]="6" />
+            <br><span class="text-danger" (click)="resend()" style="font-size: 15px; cursor: pointer">Resend?</span>
+
+           </div>
+            
+          </div>
+          <!-- 
+            <p *ngIf="checkValidOtpErrorText" class="invalid-feedback text-12 text-center">
+              Please check valid otp...
+            </p> -->
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+      Close
+    </button>
+    <button *ngIf="!otpEnable" type="submit" class="btn btn-outline-primary btn-rounded" (click)="verifySubmit()">
+      Submit
+    </button>
+    
+    <!-- <button *ngIf="otpEnable" type="submit" class="btn btn-outline-primary btn-rounded" (click)="updatePin()">
+      Update
+    </button> -->
+
+   
+
+  </div>
+</div>
+
+
+<div class="modal-body" *ngIf="!verifyFlag">
+
+  <h5>Please update your T-PIN</h5>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-12 mb-3">
+        <div class="form-group">
+          <div class="col-md-12 form-group mb-3" *ngIf="!otpEnable">
+            <label for="newPin">New PIN</label>
+            <input class="form-control form-control-rounded" [(ngModel)]="new_pin_value" id="new_pin_value"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+              placeholder="new PIN" type="text" autocomplete="off" [minlength]="6" [maxlength]="6" />
+
+          </div>
+
+          <div class="col-md-12 form-group mb-3" *ngIf="!otpEnable">
+            <label for="confirmPin">Confirm PIN </label>
+            <input class="form-control form-control-rounded" [(ngModel)]="confirm_pin_value" id="confirm_pin_value"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+              placeholder="confirm PIN" type="text" autocomplete="off" [minlength]="6" [maxlength]="6" />
+
+          </div>
+
+          <div class="col-md-12 form-group mb-3" *ngIf="otpEnable">
+            <label for="otp">OTP Number</label>
+            <input class="form-control form-control-rounded" [(ngModel)]="otp_value" id="otp_value"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+              placeholder="otp number" type="text" autocomplete="off" [minlength]="6" [maxlength]="6" />
+              <br><span class="text-danger" (click)="resend()" style="font-size: 15px; cursor: pointer">Resend?</span>
+          </div>
+
+
+          <p *ngIf="checkValidTPinErrorText" class="invalid-feedback text-12 text-center">
+            Please Enter valid PIN...
+          </p>
+          <p *ngIf="checkValidOtpErrorText" class="invalid-feedback text-12 text-center">
+            Please check valid otp...
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+      Close
+    </button>
+
+    <button *ngIf="!otpEnable" type="submit" class="btn btn-outline-primary btn-rounded" (click)="Submit()">
+      Submit
+    </button>
+    <!-- <button *ngIf="otpEnable" class="btn btn-outline-primary btn-rounded" (click)="resend()">Resend?</button> -->
+
+    <button *ngIf="otpEnable" type="submit" class="btn btn-outline-primary btn-rounded" (click)="updatePin()">
+      Update
+    </button>
+
+    
+  </div>
+</div>

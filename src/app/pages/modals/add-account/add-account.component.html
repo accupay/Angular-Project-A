@@ -1,0 +1,104 @@
+<div class="modal-body">
+  <h4 class="confirm-transaction text-center">Add Account Details!</h4>
+  <br />
+  <div class="row ">
+    <div class="col-md-12">
+      <form [formGroup]="addAccountForm">
+        <div class="col-md-12 form-group mb-3 ">
+          <div class="mt-4">
+            <mat-form-field class="example-full-width">
+              <!-- <label><span >IFSC Code</span></label> -->
+              <input matInput placeholder="IFSC Code" formControlName="ifsc_code" type="text" />
+            </mat-form-field>
+            &nbsp; <span style="color: red; cursor: pointer !important;" (click)="notSureIfsc()">Select IFSC?</span>
+          </div>
+
+          <div class="mt-4">
+            <mat-form-field class="example-full-width">
+              <!-- <label><span >Bank</span></label> -->
+              <input matInput placeholder="Bank" formControlName="bank" type="text" />
+            </mat-form-field>
+          </div>
+
+
+
+          <!-- </div> -->
+
+          <!-- <div class="col-md-12 form-group mb-3 text-center"> -->
+          <div class="mt-4">
+            <mat-form-field class="example-full-width">
+              <!-- <label><span >Account Name</span></label> -->
+              <input matInput placeholder="Account Name" formControlName="payee_name" type="text" />
+            </mat-form-field>
+            <!-- <mat-hint *ngIf="!accountName.value">Enter your password</mat-hint> -->
+          </div>
+          <div class="mt-4">
+            <mat-form-field class="example-full-width">
+              <!-- <label><span >Account Number</span></label> -->
+              <input matInput placeholder="Account Number" formControlName="account_number" type="password"
+                appBlockCopyPaste autocomplete="off" [minlength]="minDigitAcc" [maxlength]="maxDigitAcc" />
+            </mat-form-field>
+            <!-- <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['required']">
+              This field is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['minlength']">
+              This field must have at least
+              {{ minDigitAcc }} character.
+            </div>
+            <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['maxlength']">
+              This field must have at most
+              {{ maxDigitAcc }} character.
+            </div> -->
+            <!-- <div *ngIf="account_number.errors?.['pattern']">
+              This field is not allow special character after 6 digits.
+            </div> -->
+          </div>
+          <div class="mt-4">
+            <mat-form-field class="example-full-width">
+              <!-- <label><span >Account Number</span></label> -->
+              <input matInput placeholder="Confirm Account Number" formControlName="confirmAccountNumber" type="text"
+                appBlockCopyPaste autocomplete="off" [minlength]="minDigitAcc" [maxlength]="maxDigitAcc" />
+            </mat-form-field>
+            <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['mismatch']">
+              Account number is not matching
+            </div>
+            <!-- <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['required']">
+              This field is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['minlength']">
+              This field must have at least
+              {{ minDigitAcc }} character.
+            </div>
+            <div class="invalid-feedback" *ngIf="addAccountForm.errors?.['maxlength']">
+              This field must have at most
+              {{ maxDigitAcc }} character.
+            </div> -->
+          </div>
+          <div class="mt-4">
+            <label for="fileUpload" style="color: black;">KYC Upload</label><br>
+            <input formControlName="file" (change)="GetFileOnLoad($event)" type="file" id="fileUpload"><br>
+            <span style="color: blue;">Note: please attach Bank Pass Book or cheque file</span>
+          </div>
+          <!-- </div> -->
+
+        </div>
+
+      </form>
+
+      <!-- <p
+        *ngIf="checkValidIfscErrorText"
+        class="invalid-feedback text-12 text-center"
+      >
+        Please select above fields to fetch IFSC Code...
+      </p> -->
+    </div>
+  </div>
+</div>
+<div class="modal-footer bene-transaction-footer">
+  <button type="button" class="btn btn-outline-danger btn-rounded" (click)="close()">
+    Cancel
+  </button>
+  <button type="button" class="btn btn-outline-primary btn-rounded" (click)="save(addAccountForm)">
+    Save
+  </button>
+</div>

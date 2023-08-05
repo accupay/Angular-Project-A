@@ -1,0 +1,189 @@
+<div class="scrollClass">
+<div class="row">
+  <div class="col-lg-1 col-md-1"></div>
+  <div class="col-lg-12 col-md-12">
+    <div class="card mb-5 text-center">
+      <div class="card-body">
+        <div class="row row-xs">
+          <div class="col-md-3">
+            <mat-form-field class="atp-mat-date-picker">
+              <input
+                matInput
+                [matDatepicker]="dp1"
+                placeholder="From Date"
+                [max]="maxDate"
+                [(ngModel)]="fromDate"
+                (click)="dp1.open()"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dp1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dp1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="atp-mat-date-picker">
+              <input
+                matInput
+                placeholder="To Date"
+                [max]="maxDate"
+                [matDatepicker]="dp2"
+                [(ngModel)]="toDate"
+                (click)="dp2.open()"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dp2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dp2></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <btn-loading
+                (click)="searchTransaction()"
+                btnClass="btn-primary btn-rounded btn-block"
+                [loadingText]="loadingText"
+                [loading]="loading"
+              >
+                {{ loadingText }}
+              </btn-loading>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-1 col-md-1"></div>
+</div>
+
+<div class="export-button">
+  <div class="row">
+      <div class="col-md-4">
+        <input
+        id="last_name"
+        class="form-control icon"
+        type="search"
+        (keyup)="filterList()" (change)="filterList()"
+        [(ngModel)]="searchValue"
+        placeholder="Enter to search from the datas"
+      />
+      </div>
+      <div class="col-md-8">
+        <button type="button" class="btn btn-info m-1" (click)="exportToExcel()">
+          Export to Excel
+        </button>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="!noRecordFlag && this.dataSource.data.length == 0" class="row norec"> No Record Found</div>
+<div [ngClass]="changeClass()">
+  <table
+    mat-table
+    matSort
+    matTableResponsive
+    [dataSource]="dataSource"
+    class="reports-table"
+  >
+  <tr  class="mat-row" *matNoDataRow>
+    <td *ngIf="noRecordFlag" class="mat-cell text-center" [attr.colspan]="7">No Record Found</td>
+  </tr>
+
+    <ng-container matColumnDef="Transaction ID">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Transaction ID
+      </th>
+      <td mat-cell *matCellDef="let element" class="first-row">
+        {{ element.transaction_id }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Transaction Date">
+      <th
+        mat-header-cell
+        mat-sort-header
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Transaction Date
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.transaction_date }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Credit">
+      <th
+        mat-header-cell
+        mat-sort-header
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Credit
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element?.credit }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Debit">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Debit
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element?.debit }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Opening Balance">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Opening Balance
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element?.opening_balance }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Closing Balance">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Closing Balance
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element?.closing_balance }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Comments">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="headers atp-report-th-header"
+      >
+        Comments
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element?.comments }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[10, 20, 30]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
+</div>
